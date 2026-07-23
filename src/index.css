@@ -447,40 +447,10 @@
     line-height: 1.4;
   }
 
-  /* Footer */
-  .footer {
-    margin-top: 96px;
-    border-top: 1px solid var(--line);
-    padding: 48px 0 72px;
-  }
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    flex-wrap: wrap;
-  }
-  .hanko {
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    background: var(--accent);
-    color: #fff;
-    transform: rotate(-2deg);
-    font-family: var(--disp);
-    font-weight: 800;
-    font-size: 16px;
-    line-height: 1.25;
-    display: grid;
-    place-content: center;
-    text-align: center;
-    letter-spacing: 0.05em;
-  }
-  .footer-meta {
-    font-size: 13px;
-    color: var(--ink-soft);
-  }
-  .footer-meta .mono {
-    font-size: 12px;
+  /* 最終セクションの下に余白を確保 (フッターなし) */
+  main {
+    display: block;
+    padding-bottom: 120px;
   }
 }
 

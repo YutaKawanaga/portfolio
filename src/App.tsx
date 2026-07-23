@@ -4,7 +4,6 @@ import { Career } from "./components/Career";
 import { Work } from "./components/Work";
 import { Skills } from "./components/Skills";
 import { Output } from "./components/Output";
-import { Footer } from "./components/Footer";
 
 export function App() {
   return (
@@ -17,7 +16,6 @@ export function App() {
         <Skills />
         <Output />
       </main>
-      <Footer />
     </>
   );
 }

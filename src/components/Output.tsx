@@ -18,7 +18,13 @@ export function Output() {
           {outputs.map((out) => {
             const Icon = iconFor[out.key];
             return (
-              <a className="out" href={out.url} key={out.key}>
+              <a
+                className="out"
+                href={out.url}
+                key={out.key}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Icon />
                 <span className="out-svc">{out.svc}</span>
               </a>

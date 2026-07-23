@@ -19,15 +19,30 @@ export function Hero() {
             <span className="hero-role">{profile.role}</span>
           </p>
           <nav className="hero-links" aria-label="外部リンク">
-            <a className="lbtn" href={links.github}>
+            <a
+              className="lbtn"
+              href={links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <GitHubIcon />
               GitHub
             </a>
-            <a className="lbtn" href={links.zenn}>
+            <a
+              className="lbtn"
+              href={links.zenn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ZennIcon />
               Zenn
             </a>
-            <a className="lbtn" href={links.qiita}>
+            <a
+              className="lbtn"
+              href={links.qiita}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <QiitaIcon />
               Qiita
             </a>

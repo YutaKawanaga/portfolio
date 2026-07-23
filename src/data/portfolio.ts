@@ -5,16 +5,11 @@
 
 export const profile = {
   eyebrow: "Portfolio — Kawanaga Yuta",
-  // ヒーローコピー (仮置き)。[a, b, c, d] は「<hl>a</hl>b / 改行 / <hl>c</hl>d」と表示される。
-  // a と c がマーカー強調される語。確定したら差し替える。
-  //
-  // 差し替え候補 (トーン別):
-  //   控えめ・自分の言葉:  ["必要なこと", "に、", "手を伸ばす", "。"]  ← 現在これ
-  //   craft:              ["つくる", "、直す、", "仕組みにする", "。"]
-  //   領域横断:            ["領域を決めずに", "、", "手を動かす", "。"]
-  //   事実ベース:          ["フロントからインフラ", "、", "そしてチームまで", "。"]
-  //   チーム志向:          ["つくることも", "、", "つくる人を増やすことも", "。"]
-  headlineParts: ["必要なこと", "に、", "手を伸ばす", "。"] as const,
+  // ヒーローは「やりたいこと(ビジョン)」を掲げる。__..__ がマーカー強調になる。
+  headline:
+    "子どもが将来、学びや仕事、日常を__「楽しい」__と感じられる社会をつくりたい。",
+  // ビジョンとやってきたことを繋ぐ一言 (控えめに)。
+  lead: "そのために、実装から組織づくりまで、領域を決めずに手を動かしています。",
   role: "リードエンジニア @ PLAINER株式会社",
   name: "川永 勇多",
   kana: "かわなが ゆうた",
@@ -93,71 +88,48 @@ export const career: CareerEntry[] = [
 export const work = {
   name: "iegoto",
   chip: "家族で運用中",
+  tagline: "家族専用のWebカレンダー",
   paragraphs: [
-    "スマホを持たない子どもも「プロフィール」として予定の主体になれる、家族専用のWebカレンダー。Vercel Hobby + Neon Free の0円構成で本番運用中。",
-    "モノレポでクリーンアーキテクチャの依存方向をパッケージ境界で強制し、RRULE展開エンジンを純関数で実装。設計判断は docs/design に記録する運用。",
+    "家族の予定・買い物・分担といった「家の共有事」をまるごと集めるWebカレンダー。スマホを持たない子どもも、ログイン不要の「プロフィール」として予定の主体になれるのが差別化点。メンバーごとの色分け、買い物リストのリアルタイム共有、Web Push によるPWA通知にも対応している。",
+    "個人開発ながら、フルスタックTypeScriptのモノレポでクリーンアーキテクチャを実践。RRULE展開エンジンなどのドメインロジックを依存ゼロで独立させ、家族単位のデータ分離は型で強制している。CI・リマインダー配信・日次バックアップまで含め、Vercel + Neon の無料枠だけで本番運用。設計上の意思決定はすべてドキュメントに記録している。",
   ],
-  tech: "Vite / React 19 / Hono / tRPC v11 / Prisma / Playwright",
-  url: "https://iegoto-drab.vercel.app",
+  tech: "Vite / React 19 / Hono / tRPC v11 / Prisma / PostgreSQL / Playwright",
 } as const;
 
+// スキルは強調なしのフラット表示。文字列の配列で持つ。
 export type SkillGroup = {
   label: string;
-  items: { name: string; hot?: boolean }[];
+  items: string[];
 };
+
+// Skills セクションのリード (経験年数)。
+export const skillsLead = "Webアプリケーション開発 8年";
 
 export const skills: SkillGroup[] = [
   {
-    label: "BACKEND / FRONTEND",
-    items: [
-      { name: "Kotlin / Ktor", hot: true },
-      { name: "React / TypeScript", hot: true },
-      { name: "Python / Django" },
-      { name: "PostgreSQL" },
-      { name: "Redis" },
-      { name: "Jotai" },
-      { name: "React Query" },
-      { name: "shadcn/ui" },
-      { name: "Vite" },
-    ],
+    label: "フロントエンド",
+    items: ["React / TypeScript", "Chakra UI", "React Query / SWR / Recoil", "Vite"],
   },
   {
-    label: "INFRA",
-    items: [
-      { name: "GCP", hot: true },
-      { name: "AWS", hot: true },
-      { name: "Cloud Run" },
-      { name: "IAP" },
-      { name: "ECS" },
-      { name: "Lambda" },
-      { name: "Control Tower" },
-      { name: "Docker" },
-      { name: "Terraform" },
-    ],
+    label: "バックエンド",
+    items: ["Kotlin / Ktor", "Python / Django REST Framework", "PostgreSQL / Redis"],
   },
   {
-    label: "AI / 設計",
-    items: [
-      { name: "Claude / Claude Code", hot: true },
-      { name: "MCP", hot: true },
-      { name: "OpenAI / Codex" },
-      { name: "TypeSpec / OpenAPI" },
-      { name: "Playwright" },
-      { name: "Kotest" },
-      { name: "クリーンアーキテクチャ" },
-      { name: "DDD" },
-      { name: "ブラウザ拡張" },
-    ],
+    label: "インフラ",
+    items: ["GCP (Cloud Run / IAP / Secret Manager)", "AWS", "Docker"],
+  },
+  {
+    label: "AI / 開発自動化",
+    items: ["Claude / Anthropic SDK", "MCP (Model Context Protocol)", "Claude Code / Antigravity", "Slack Bot"],
+  },
+  {
+    label: "その他",
+    items: ["TypeSpec / OpenAPI", "Playwright", "Auth0", "Git / Notion / Slack"],
   },
 ];
 
 export const outputs = [
-  { key: "zenn", svc: "Zenn", desc: "技術記事を書いています", url: links.zenn },
-  { key: "qiita", svc: "Qiita", desc: "昔の記事はこちら", url: links.qiita },
-  {
-    key: "github",
-    svc: "GitHub",
-    desc: "コードはこちら (iegoto も)",
-    url: links.github,
-  },
+  { key: "zenn", svc: "Zenn", url: links.zenn },
+  { key: "qiita", svc: "Qiita", url: links.qiita },
+  { key: "github", svc: "GitHub", url: links.github },
 ] as const;

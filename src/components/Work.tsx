@@ -17,15 +17,13 @@ export function Work() {
           <div className="work-body">
             <div className="work-head">
               <h3 className="work-h3">{work.name}</h3>
+              <span className="work-tagline">{work.tagline}</span>
               <span className="st">{work.chip}</span>
             </div>
             {work.paragraphs.map((para, i) => (
               <p key={i}>{para}</p>
             ))}
-            <div className="tech">
-              {work.tech} —{" "}
-              <a href={work.url}>{work.url.replace(/^https?:\/\//, "")} ↗</a>
-            </div>
+            <div className="tech">{work.tech}</div>
           </div>
         </div>
       </div>

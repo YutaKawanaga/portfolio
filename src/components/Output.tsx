@@ -20,11 +20,7 @@ export function Output() {
             return (
               <a className="out" href={out.url} key={out.key}>
                 <Icon />
-                <span>
-                  <span className="out-svc">{out.svc}</span>
-                  <br />
-                  <span className="out-desc">{out.desc}</span>
-                </span>
+                <span className="out-svc">{out.svc}</span>
               </a>
             );
           })}

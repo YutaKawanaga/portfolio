@@ -438,7 +438,17 @@
     height: 26px;
     fill: currentColor;
     flex: 0 0 auto;
-    color: var(--accent);
+  }
+
+  /* サービスアイコンのブランドカラー (Zenn=青 / Qiita=緑 / GitHub=墨・テーマ追従) */
+  .icon-github {
+    color: var(--ink);
+  }
+  .icon-zenn {
+    color: #3ea8ff;
+  }
+  .icon-qiita {
+    color: #55c500;
   }
   .out-svc {
     font-family: var(--disp);

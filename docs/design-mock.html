@@ -7,14 +7,11 @@
     --card: #FFFFFF;
     --ink: #26231F;
     --ink-soft: #5C574E;
-    --line: #D8D3C8;
+    --line: #DCD7CC;
     --line-soft: #EAE7DF;
     --disp: "Hiragino Maru Gothic ProN", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Osaka-Mono", monospace;
-    /* 手描き風のゆらぎ角丸 */
-    --wob: 255px 18px 225px 18px / 18px 225px 18px 255px;
-    --wob-s: 60px 8px 55px 10px / 10px 55px 8px 60px;
   }
   :root[data-accent="ai"]   { --a-l: #33529E; --a-d: #7E97D8; }
   :root[data-accent="matsu"]{ --a-l: #2E6B4E; --a-d: #6FAE8F; }
@@ -22,12 +19,8 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --accent: var(--a-d);
-      --paper: #1A1917;
-      --card: #232120;
-      --ink: #EDE9E2;
-      --ink-soft: #A29C91;
-      --line: #403C35;
-      --line-soft: #2C2925;
+      --paper: #1A1917; --card: #232120; --ink: #EDE9E2;
+      --ink-soft: #A29C91; --line: #403C35; --line-soft: #2C2925;
     }
   }
   :root[data-theme="dark"] {
@@ -38,13 +31,12 @@
   :root[data-theme="light"] {
     --accent: var(--a-l);
     --paper: #FBFAF6; --card: #FFFFFF; --ink: #26231F;
-    --ink-soft: #5C574E; --line: #D8D3C8; --line-soft: #EAE7DF;
+    --ink-soft: #5C574E; --line: #DCD7CC; --line-soft: #EAE7DF;
   }
 
   body {
     background: var(--paper); color: var(--ink);
     font-family: var(--sans); line-height: 1.9; font-size: 16px; margin: 0;
-    overflow-x: hidden;
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
   a { color: var(--ink); text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
@@ -52,136 +44,101 @@
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .mono { font-family: var(--mono); }
 
-  /* マーカー(蛍光ペン)ハイライト */
+  /* マーカー(蛍光ペン)ハイライト — 控えめに残す */
   .hl {
-    background: linear-gradient(transparent 58%, color-mix(in srgb, var(--accent) 26%, transparent) 58%, color-mix(in srgb, var(--accent) 26%, transparent) 94%, transparent 94%);
+    background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 20%, transparent) 62%, color-mix(in srgb, var(--accent) 20%, transparent) 94%, transparent 94%);
   }
 
   /* ---- モック用ノーティスバー ---- */
-  .mocknote { font-family: var(--mono); font-size: 12px; border-bottom: 1px dashed var(--line); padding: 10px 0; }
+  .mocknote { font-family: var(--mono); font-size: 12px; border-bottom: 1px solid var(--line); padding: 10px 0; }
   .mocknote .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
   .mocknote strong { color: var(--accent); letter-spacing: .08em; }
   .mocknote .sw { display: flex; gap: 6px; margin-left: auto; align-items: center; }
   .mocknote button {
     font-family: var(--mono); font-size: 12px; cursor: pointer;
-    background: none; border: 1.5px solid var(--line); color: var(--ink);
-    padding: 2px 10px; border-radius: var(--wob-s);
+    background: none; border: 1px solid var(--line); color: var(--ink);
+    padding: 2px 10px; border-radius: 999px;
   }
   .mocknote button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
 
   /* ---- 共通 ---- */
   section { padding: 76px 0 0; }
-  .badge {
-    display: inline-block; font-family: var(--mono); font-size: 12px;
-    letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
-    border: 1.5px solid var(--accent); border-radius: var(--wob-s);
-    padding: 2px 14px; transform: rotate(-2deg); margin-bottom: 18px;
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
   }
   h2 {
-    font-family: var(--disp); font-weight: 700; font-size: 27px; margin: 0 0 28px;
-    text-wrap: balance; letter-spacing: .02em;
-    text-decoration: underline wavy var(--accent) 2px; text-underline-offset: 10px;
-    display: inline-block;
+    font-family: var(--disp); font-weight: 700; font-size: 26px;
+    margin: 0 0 6px; letter-spacing: .02em; text-wrap: balance;
+  }
+  h2 + .rule {
+    width: 36px; height: 3px; background: var(--accent); border: none;
+    border-radius: 2px; margin: 0 0 28px;
   }
   .prose { max-width: 40rem; }
 
-  /* スタンプ風チップ */
+  /* チップ (Careerの実績ラベル) */
   .st {
     display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700;
-    letter-spacing: .1em; color: var(--accent);
-    border: 1.5px solid var(--accent); border-radius: var(--wob-s);
-    padding: 1px 10px; transform: rotate(1.5deg); white-space: nowrap;
+    letter-spacing: .08em; color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    border-radius: 999px; padding: 2px 12px; white-space: nowrap;
   }
-  .st:nth-of-type(2n) { transform: rotate(-1.5deg); }
 
   /* ---- Hero ---- */
-  .hero { padding: 64px 0 16px; }
+  .hero { padding: 72px 0 8px; }
   .hero .wrap { display: flex; gap: 48px; align-items: center; flex-wrap: wrap-reverse; }
   .hero-text { flex: 1 1 400px; }
+  .hero .eyebrow { margin-bottom: 6px; }
   .hero h1 {
     font-family: var(--disp); font-weight: 800;
-    font-size: clamp(30px, 5.5vw, 46px); line-height: 1.55;
-    margin: 10px 0 14px; text-wrap: balance; letter-spacing: .02em;
+    font-size: clamp(30px, 5.5vw, 44px); line-height: 1.55;
+    margin: 6px 0 14px; text-wrap: balance; letter-spacing: .02em;
   }
   .hero .role { color: var(--ink-soft); margin: 0 0 4px; font-size: 15px; }
-  .hero .name { font-size: 19px; font-weight: 700; margin: 0 0 22px; }
+  .hero .name { font-size: 19px; font-weight: 700; margin: 0 0 24px; }
   .hero .name .kana { font-size: 12px; color: var(--ink-soft); font-weight: 400; margin-left: 10px; letter-spacing: .12em; }
   .tag-kari {
     display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 400;
-    border: 1.5px dashed var(--line); color: var(--ink-soft);
-    padding: 0 8px; border-radius: var(--wob-s); vertical-align: middle; margin-left: 12px;
+    border: 1px dashed var(--line); color: var(--ink-soft);
+    padding: 0 8px; border-radius: 999px; vertical-align: middle; margin-left: 12px;
   }
 
-  /* アイコン付きリンクボタン (Hero) */
+  /* アイコン付きリンクボタン */
   .hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
   .lbtn {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--mono); font-size: 13px; font-weight: 700;
     text-decoration: none; color: var(--ink);
-    border: 1.5px solid var(--ink); border-radius: var(--wob-s);
-    padding: 6px 16px; background: var(--card);
-    transition: transform .15s ease, box-shadow .15s ease, color .15s ease, border-color .15s ease;
+    border: 1.5px solid var(--line); border-radius: 999px;
+    padding: 6px 18px; background: var(--card);
+    transition: border-color .15s ease, color .15s ease, transform .15s ease;
   }
-  .lbtn svg { width: 18px; height: 18px; fill: currentColor; }
-  .lbtn:hover {
-    color: var(--accent); border-color: var(--accent);
-    transform: rotate(-1.5deg) translateY(-2px);
-    box-shadow: 3px 3px 0 color-mix(in srgb, var(--accent) 45%, transparent);
-  }
+  .lbtn svg { width: 17px; height: 17px; fill: currentColor; }
+  .lbtn:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 
-  /* アバター: 手描き風フレーム + 吹き出し + タピオカ */
-  .avatar-area { position: relative; flex: 0 0 auto; padding: 20px 30px 10px 10px; }
   .avatar {
-    width: 190px; height: 190px;
-    border: 2.5px solid var(--ink); border-radius: 48% 52% 55% 45% / 50% 46% 54% 50%;
-    background: var(--card);
+    flex: 0 0 auto; width: 180px; height: 180px; border-radius: 50%;
+    border: 2px solid var(--line); background: var(--card);
     display: grid; place-content: center; text-align: center;
     font-family: var(--mono); font-size: 11px; color: var(--ink-soft); line-height: 1.7;
   }
-  .bubble {
-    position: absolute; top: -14px; right: -6px;
-    font-family: var(--disp); font-size: 12px; font-weight: 700;
-    background: var(--card); border: 1.5px solid var(--ink);
-    border-radius: var(--wob-s); padding: 4px 12px; transform: rotate(3deg);
-  }
-  .bubble::after {
-    content: ""; position: absolute; left: 18px; bottom: -7px;
-    width: 10px; height: 10px; background: var(--card);
-    border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink);
-    transform: rotate(45deg);
-  }
-  .pearl { position: absolute; border-radius: 50%; background: var(--ink); opacity: .85; }
-  .pearl.p1 { width: 10px; height: 10px; left: -4px;  top: 40px;  animation: bob 3.2s ease-in-out infinite; }
-  .pearl.p2 { width: 7px;  height: 7px;  left: 14px;  bottom: 6px; animation: bob 2.7s .4s ease-in-out infinite; }
-  .pearl.p3 { width: 8px;  height: 8px;  right: 6px;  bottom: 30px; animation: bob 3.6s .8s ease-in-out infinite; }
-  .pearl.p4 { width: 5px;  height: 5px;  right: 22px; top: 26px;  animation: bob 3s 1.2s ease-in-out infinite; }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-
-  /* ---- マーキー ---- */
-  .marquee {
-    margin-top: 56px; border-top: 1.5px dashed var(--line); border-bottom: 1.5px dashed var(--line);
-    overflow: hidden; padding: 10px 0; white-space: nowrap;
-  }
-  .marquee .track { display: inline-block; animation: slide 30s linear infinite; }
-  .marquee span { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); letter-spacing: .1em; }
-  .marquee .dot { color: var(--accent); margin: 0 18px; }
-  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ---- About ---- */
   .about p { max-width: 40rem; margin: 0 0 14px; }
 
   /* ---- 職務経歴 timeline ---- */
-  .tl { list-style: none; margin: 0; padding: 0 0 0 20px; border-left: 2.5px dashed var(--line); }
-  .tl > li { position: relative; padding: 0 0 48px 24px; }
+  .tl { list-style: none; margin: 0; padding: 0 0 0 20px; border-left: 2px solid var(--line); }
+  .tl > li { position: relative; padding: 0 0 46px 24px; }
   .tl > li:last-child { padding-bottom: 8px; }
   .tl > li::before {
-    content: ""; position: absolute; left: -29px; top: 12px;
-    width: 11px; height: 11px; border-radius: 50%;
-    background: var(--ink); border: 3px solid var(--paper);
+    content: ""; position: absolute; left: -26px; top: 12px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--line); border: 3px solid var(--paper);
   }
   .tl > li:first-child::before { background: var(--accent); }
   .tl .period { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); letter-spacing: .06em; }
-  .tl .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 4px 0 2px; }
+  .tl .head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 4px 0 2px; }
   .tl h3 { font-family: var(--disp); font-size: 21px; font-weight: 800; margin: 0; }
   .tl .role { font-size: 13px; color: var(--accent); font-weight: 700; margin: 0 0 10px; }
   .tl p.about-t { font-size: 14px; color: var(--ink-soft); margin: 0 0 10px; max-width: 40rem; }
@@ -191,64 +148,55 @@
 
   /* ---- iegoto ---- */
   .work {
-    position: relative; background: var(--card);
-    border: 2px solid var(--ink); border-radius: var(--wob);
-    display: flex; flex-wrap: wrap; box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 30%, transparent);
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 14px;
+    display: flex; flex-wrap: wrap; overflow: hidden;
+    transition: border-color .15s ease;
   }
-  .work .sticker {
-    position: absolute; top: -16px; left: 24px;
-    font-family: var(--disp); font-size: 13px; font-weight: 800;
-    background: var(--accent); color: #fff;
-    border-radius: var(--wob-s); padding: 3px 16px; transform: rotate(-3deg);
-  }
+  .work:hover { border-color: var(--accent); }
   .work .shot {
-    flex: 1 1 240px; min-height: 210px; margin: 20px;
-    border: 2px dashed var(--line); border-radius: 14px 40px 18px 44px / 40px 16px 44px 14px;
+    flex: 1 1 240px; min-height: 210px; margin: 18px;
+    border: 2px dashed var(--line); border-radius: 10px;
     display: grid; place-content: center;
     font-family: var(--mono); font-size: 11px; color: var(--ink-soft); text-align: center; line-height: 1.7;
   }
-  .work .body { flex: 2 1 380px; padding: 32px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .work .body { flex: 2 1 380px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .work .head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .work h3 { font-family: var(--disp); font-size: 22px; font-weight: 800; margin: 0; }
   .work p { margin: 0; font-size: 14.5px; max-width: 40rem; }
-  .work .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1.5px dashed var(--line-soft); padding-top: 12px; }
+  .work .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 12px; }
 
   /* ---- スキル ---- */
   .pills { display: flex; flex-wrap: wrap; gap: 10px; max-width: 46rem; }
-  .pillgroup { margin-bottom: 26px; }
+  .pillgroup { margin-bottom: 24px; }
   .pillgroup .glabel { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--accent); margin: 0 0 10px; }
   .pill {
     font-size: 13.5px; background: var(--card);
-    border: 1.5px solid var(--line); border-radius: var(--wob-s);
-    padding: 3px 14px; transition: transform .15s ease, border-color .15s ease;
+    border: 1.5px solid var(--line); border-radius: 999px;
+    padding: 3px 14px; transition: border-color .15s ease;
   }
   .pill.hot { border-color: var(--ink); font-weight: 700; }
-  .pill:hover { border-color: var(--accent); transform: rotate(-1.5deg); }
+  .pill:hover { border-color: var(--accent); }
 
   /* ---- アウトプット ---- */
-  .outs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .outs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
   .out {
     display: flex; align-items: center; gap: 14px;
-    background: var(--card); border: 2px solid var(--ink); border-radius: var(--wob);
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 14px;
     padding: 18px 20px; text-decoration: none;
-    transition: transform .15s ease, box-shadow .15s ease;
+    transition: border-color .15s ease, transform .15s ease;
   }
-  .out:nth-child(2) { transform: rotate(.6deg); }
-  .out:hover {
-    transform: rotate(-1deg) translateY(-3px);
-    box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 45%, transparent);
-    color: var(--ink);
-  }
-  .out svg { width: 30px; height: 30px; fill: currentColor; flex: 0 0 auto; color: var(--accent); }
+  .out:hover { border-color: var(--accent); transform: translateY(-3px); color: var(--ink); }
+  .out svg { width: 28px; height: 28px; fill: currentColor; flex: 0 0 auto; color: var(--accent); }
   .out .svc { font-family: var(--disp); font-weight: 800; font-size: 16px; line-height: 1.4; }
   .out .desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
 
   /* ---- Footer ---- */
-  footer { margin-top: 96px; border-top: 1.5px dashed var(--line); padding: 48px 0 72px; }
-  footer .wrap { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  footer { margin-top: 96px; border-top: 1px solid var(--line); padding: 48px 0 72px; }
+  footer .wrap { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
   .hanko {
-    width: 54px; height: 54px; border-radius: 10px 14px 8px 16px / 14px 8px 16px 10px;
-    background: var(--accent); color: #fff; transform: rotate(-4deg);
-    font-family: var(--disp); font-weight: 800; font-size: 17px; line-height: 1.25;
+    width: 50px; height: 50px; border-radius: 10px;
+    background: var(--accent); color: #fff; transform: rotate(-2deg);
+    font-family: var(--disp); font-weight: 800; font-size: 16px; line-height: 1.25;
     display: grid; place-content: center; text-align: center; letter-spacing: .05em;
   }
   footer .meta { font-size: 13px; color: var(--ink-soft); }
@@ -256,7 +204,7 @@
 
   /* ---- モック用スペックセクション ---- */
   .spec { margin-top: 96px; border-top: 2px solid var(--ink); padding-top: 24px; }
-  .spec h2 { font-family: var(--mono); font-size: 14px; letter-spacing: .2em; text-decoration: none; }
+  .spec h2 { font-family: var(--mono); font-size: 14px; letter-spacing: .2em; }
   .spec .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; font-size: 13px; }
   .spec .chipset { display: flex; gap: 8px; flex-wrap: wrap; }
   .spec .c { width: 40px; height: 40px; border-radius: 2px; border: 1px solid var(--line); }
@@ -265,15 +213,14 @@
   .spec dd { margin: 0; color: var(--ink-soft); }
 
   @media (prefers-reduced-motion: reduce) {
-    .pearl, .marquee .track { animation: none; }
-    .lbtn, .out, .pill { transition: none; }
+    .lbtn, .out, .pill, .work { transition: none; }
   }
 </style>
 
 <div class="mocknote">
   <div class="wrap">
-    <strong>DESIGN MOCK v2</strong>
-    <span>手描き・遊びを足した改訂版 (この帯と最下部のスペック欄は実装に含めない)</span>
+    <strong>DESIGN MOCK v3</strong>
+    <span>v2の遊びを間引いた調整版 (この帯と最下部のスペック欄は実装に含めない)</span>
     <span class="sw" role="group" aria-label="アクセント色の切り替え">
       accent:
       <button type="button" data-a="shu" aria-pressed="true">朱</button>
@@ -286,7 +233,7 @@
 <header class="hero">
   <div class="wrap">
     <div class="hero-text">
-      <span class="badge">Portfolio</span>
+      <p class="eyebrow">Portfolio — Kawanaga Yuta</p>
       <h1><span class="hl">実装</span>から、<br><span class="hl">組織づくり</span>まで。<span class="tag-kari">コピーは仮</span></h1>
       <p class="role">リードエンジニア @ PLAINER株式会社</p>
       <p class="name">川永 勇多<span class="kana">かわなが ゆうた</span></p>
@@ -305,24 +252,15 @@
         </a>
       </nav>
     </div>
-    <div class="avatar-area" aria-hidden="true">
-      <span class="bubble">ここに僕のイラスト</span>
-      <div class="avatar">assets/icon.png<br>配置待ち</div>
-      <span class="pearl p1"></span><span class="pearl p2"></span>
-      <span class="pearl p3"></span><span class="pearl p4"></span>
-    </div>
-  </div>
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      <span>Kotlin<i class="dot">●</i>React<i class="dot">●</i>TypeScript<i class="dot">●</i>GCP<i class="dot">●</i>AWS<i class="dot">●</i>Claude Code<i class="dot">●</i>MCP<i class="dot">●</i>クリーンアーキテクチャ<i class="dot">●</i>AI-DLC<i class="dot">●</i>0→1<i class="dot">●</i>チームビルディング<i class="dot">●</i></span><span>Kotlin<i class="dot">●</i>React<i class="dot">●</i>TypeScript<i class="dot">●</i>GCP<i class="dot">●</i>AWS<i class="dot">●</i>Claude Code<i class="dot">●</i>MCP<i class="dot">●</i>クリーンアーキテクチャ<i class="dot">●</i>AI-DLC<i class="dot">●</i>0→1<i class="dot">●</i>チームビルディング<i class="dot">●</i></span>
-    </div>
+    <div class="avatar">assets/icon.png<br>(白黒線画イラスト)<br>配置待ち</div>
   </div>
 </header>
 
 <section class="about">
   <div class="wrap">
-    <span class="badge">About</span>
+    <p class="eyebrow">About</p>
     <h2>やってきたこと</h2>
+    <hr class="rule">
     <p class="prose">2018年からスタートアップに身を置き、フロントエンド・バックエンド・インフラを横断して手を動かしてきました。<span class="hl">1人目エンジニアとしての0→1</span>も、<span class="hl">稼働中プロダクトの無停止フルリプレース</span>も経験しています。</p>
     <p class="prose">個人の生産性を上げること以上に、採用や仕組みづくりを通じて<span class="hl">チーム全体の生産性を引き上げる</span>ことに関心があります。直近は、人が担ってきた業務をAIエージェント前提のフローへ作り替える「開発組織のAIネイティブ化」に取り組んでいます。</p>
   </div>
@@ -330,8 +268,9 @@
 
 <section>
   <div class="wrap">
-    <span class="badge">Career</span>
+    <p class="eyebrow">Career</p>
     <h2>職務経歴</h2>
+    <hr class="rule">
     <ul class="tl">
       <li>
         <span class="period">2023.07 — 現在</span>
@@ -379,14 +318,14 @@
 
 <section>
   <div class="wrap">
-    <span class="badge">Personal Work</span>
+    <p class="eyebrow">Personal Work</p>
     <h2>個人開発</h2>
+    <hr class="rule">
     <div class="work">
-      <span class="sticker">家族で使ってます</span>
       <div class="shot">スクリーンショット<br>(カレンダー画面)</div>
       <div class="body">
-        <h3>iegoto — 家族専用Webカレンダー</h3>
-        <p>スマホを持たない子どもも「プロフィール」として予定の主体になれる、家族のためのカレンダー。Vercel Hobby + Neon Free の0円構成で本番運用中。</p>
+        <div class="head"><h3>iegoto</h3><span class="st">家族で運用中</span></div>
+        <p>スマホを持たない子どもも「プロフィール」として予定の主体になれる、家族専用のWebカレンダー。Vercel Hobby + Neon Free の0円構成で本番運用中。</p>
         <p>モノレポでクリーンアーキテクチャの依存方向をパッケージ境界で強制し、RRULE展開エンジンを純関数で実装。設計判断は docs/design に記録する運用。</p>
         <div class="tech">Vite / React 19 / Hono / tRPC v11 / Prisma / Playwright — <a href="https://iegoto-drab.vercel.app">iegoto-drab.vercel.app ↗</a></div>
       </div>
@@ -396,8 +335,9 @@
 
 <section>
   <div class="wrap">
-    <span class="badge">Skills</span>
+    <p class="eyebrow">Skills</p>
     <h2>スキル</h2>
+    <hr class="rule">
     <div class="pillgroup">
       <p class="glabel">BACKEND / FRONTEND</p>
       <div class="pills">
@@ -428,8 +368,9 @@
 
 <section>
   <div class="wrap">
-    <span class="badge">Output</span>
+    <p class="eyebrow">Output</p>
     <h2>アウトプット</h2>
+    <hr class="rule">
     <div class="outs">
       <a class="out" href="https://zenn.dev/yutakawanaga">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.264 23.771h4.984c.264 0 .498-.147.645-.352L19.614.874c.176-.293-.029-.645-.381-.645h-4.72c-.235 0-.44.117-.557.323L.03 23.361c-.088.176.029.41.234.41zM17.445 23.419l6.479-10.408c.205-.323-.029-.733-.41-.733h-4.691c-.176 0-.352.088-.44.235l-6.655 10.643c-.176.264.029.616.352.616h4.779c.234 0 .468-.117.586-.353z"/></svg>
@@ -459,14 +400,14 @@
 
 <div class="spec">
   <div class="wrap">
-    <h2>DESIGN SPEC v2 (モック専用欄)</h2>
+    <h2>DESIGN SPEC v3 (モック専用欄)</h2>
     <div class="grid">
       <div>
         <dl>
           <dt>Concept</dt>
-          <dd>アイコンの手描き線画の世界観をそのままUIに拡張。ゆらいだ角丸・傾いたスタンプ・タピオカの粒・吹き出し・マーカー線で「手描きの遊び」を足しつつ、本文の読みやすさは崩さない。</dd>
-          <dt>v1からの変更</dt>
-          <dd>明朝→丸ゴシック見出し / 直線罫→破線+ゆらぎ角丸 / Highlights廃止(実績はCareerに統合+スタンプ化) / リンクをアイコン付きボタンに / マーキー・タピオカ・吹き出し追加。</dd>
+          <dd>「柔らかいけど落ち着いてる」。丸ゴシック見出し・ピル形状・控えめなマーカー強調で温度を残しつつ、傾き・ゆらぎ・装飾アニメーションは使わない。</dd>
+          <dt>v2からの変更</dt>
+          <dd>タピオカ・吹き出し・マーキー・ゆらぎ角丸・要素の傾き・オフセット影を撤去。チップは傾いたスタンプ→静かなピルに。動きはホバー時の浮き上がりのみ。</dd>
         </dl>
       </div>
       <div>
@@ -479,16 +420,16 @@
               <span class="c" style="background:var(--ink-soft)" title="ink-soft"></span>
               <span class="c" style="background:var(--accent)" title="accent"></span>
             </span>
-            紙白 / 墨 / 淡墨 / 朱 (or 藍・松)。v1から据え置き。
+            紙白 / 墨 / 淡墨 / 朱 (or 藍・松)。据え置き。
           </dd>
           <dt>Typography</dt>
-          <dd>見出し: 丸ゴシック太字 (Hiragino Maru Gothic)。本文: ゴシック。日付・技術: 等幅。システムフォントのみ。</dd>
+          <dd>見出し: 丸ゴシック太字。本文: ゴシック。日付・技術: 等幅。システムフォントのみ。</dd>
         </dl>
       </div>
       <div>
         <dl>
-          <dt>Motion</dt>
-          <dd>タピオカの浮遊 / マーキー / ホバーで傾く程度に抑制。prefers-reduced-motion で全停止。</dd>
+          <dt>残した遊び</dt>
+          <dd>マーカー強調 (hero/about) / ピル型チップ / フッターのわずかに傾いた印鑑 / ホバーの浮き上がり。</dd>
           <dt>実装時に決めること</dt>
           <dd>・ヒーローコピー確定<br>・アイコン画像の配置 (assets/icon.png)<br>・iegoto スクリーンショット選定<br>・アクセント色の確定</dd>
         </dl>

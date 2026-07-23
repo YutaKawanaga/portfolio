@@ -36,8 +36,22 @@ docs/
 
 ## 残タスク
 
-- ヒーローコピーの確定 (現在は仮置き。`src/data/portfolio.ts` の `headlineParts`)
-- アイコン画像の差し替え (`src/assets/icon.png` と `public/icon.png` を本物のイラストで上書き)
-- iegoto のスクリーンショット配置 (`src/components/Work.tsx` の `work-shot`)
-- アクセント色の確定 (`src/index.css` の `--a-l` / `--a-d`。候補: 朱/藍/松)
-- Vercel へのデプロイ設定
+必須 (公開前に埋めたい):
+
+- **アイコン画像の差し替え** — `src/assets/icon.png` と `public/icon.png` を本物のイラストで
+  上書き (現在は自動生成のプレースホルダー)
+- **iegoto のスクリーンショット配置** — `src/components/Work.tsx` の `work-shot`
+  (現在は点線のプレースホルダー枠)
+- **Vercel デプロイの確認** — main 接続後、本番URLで表示を確認
+
+任意 (余力があれば):
+
+- Qiita アイコンを公式ロゴに差し替え (現在は緑の暫定アイコン)
+- カスタムドメインの取得 (まずは `*.vercel.app` で公開可)
+- 代表的な Zenn / Qiita 記事のピックアップ掲載
+
+決定済み:
+
+- ヒーローコピー … ビジョン (`src/data/portfolio.ts` の `headline`)。細かい調整は随時
+- アクセント色 … 朱 (`src/index.css` の `--a-l` / `--a-d`)
+- 連絡先 … GitHub のみ (メール非公開)、フッターなし

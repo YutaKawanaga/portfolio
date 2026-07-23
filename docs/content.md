@@ -9,6 +9,7 @@
 - 名前: 川永 勇多 (かわなが ゆうた)
 - 肩書き: リードエンジニア @ PLAINER株式会社
 - コピー: (plan.md §2 の案から選定)
+- アイコン: オリジナル白黒線画イラスト (`assets/icon.png`)
 - リンク: GitHub / Zenn / Qiita
 
 ## 2. Highlights (選抜3実績)
@@ -119,5 +120,5 @@ SaaS の画面をノーコードで複製・カスタマイズし、デモの作
 
 ## 8. 連絡先
 
-- メール: `[未決: 公開用アドレス]`
+- メールアドレスは公開しない (決定)
 - GitHub: https://github.com/YutaKawanaga

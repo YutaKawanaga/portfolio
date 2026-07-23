@@ -1,0 +1,407 @@
+<title>portfolio デザインモック</title>
+<style>
+  :root {
+    --a-l: #C73E20; --a-d: #E06845;
+    --accent: var(--a-l);
+    --paper: #FBFAF7;
+    --card: #FFFFFF;
+    --ink: #201E1B;
+    --ink-soft: #5C574E;
+    --line: #DCD8CE;
+    --line-soft: #EAE7DF;
+    --serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Osaka-Mono", monospace;
+  }
+  :root[data-accent="ai"]   { --a-l: #33529E; --a-d: #7E97D8; }
+  :root[data-accent="matsu"]{ --a-l: #2E6B4E; --a-d: #6FAE8F; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: var(--a-d);
+      --paper: #191816;
+      --card: #201E1B;
+      --ink: #ECE8E1;
+      --ink-soft: #A29C91;
+      --line: #3A362F;
+      --line-soft: #2B2823;
+    }
+  }
+  :root[data-theme="dark"] {
+    --accent: var(--a-d);
+    --paper: #191816;
+    --card: #201E1B;
+    --ink: #ECE8E1;
+    --ink-soft: #A29C91;
+    --line: #3A362F;
+    --line-soft: #2B2823;
+  }
+  :root[data-theme="light"] {
+    --accent: var(--a-l);
+    --paper: #FBFAF7;
+    --card: #FFFFFF;
+    --ink: #201E1B;
+    --ink-soft: #5C574E;
+    --line: #DCD8CE;
+    --line-soft: #EAE7DF;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.9;
+    font-size: 16px;
+    margin: 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--ink); text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+  a:hover { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* ---- モック用ノーティスバー (実装には含めない) ---- */
+  .mocknote {
+    font-family: var(--mono); font-size: 12px;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+  }
+  .mocknote .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+  .mocknote strong { color: var(--accent); font-weight: 700; letter-spacing: .08em; }
+  .mocknote .sw { display: flex; gap: 6px; margin-left: auto; align-items: center; }
+  .mocknote button {
+    font-family: var(--mono); font-size: 12px; cursor: pointer;
+    background: none; border: 1px solid var(--line); color: var(--ink);
+    padding: 2px 10px; border-radius: 2px;
+  }
+  .mocknote button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+
+  /* ---- 共通 ---- */
+  section { padding: 72px 0 0; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
+    color: var(--accent); text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px; margin: 0 0 20px;
+  }
+  .eyebrow::after { content: ""; height: 1px; background: var(--line); flex: 0 0 48px; }
+  .eyebrow .jp { color: var(--ink-soft); letter-spacing: .1em; }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 26px; margin: 0 0 24px; text-wrap: balance; }
+  .prose { max-width: 40rem; }
+  .mono { font-family: var(--mono); }
+  .note { font-size: 12px; color: var(--ink-soft); font-family: var(--mono); }
+
+  /* ---- Hero ---- */
+  .hero { padding: 72px 0 8px; }
+  .hero .wrap { display: flex; gap: 40px; align-items: center; flex-wrap: wrap-reverse; }
+  .hero-text { flex: 1 1 420px; }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(30px, 5.5vw, 46px); line-height: 1.5;
+    margin: 8px 0 16px; text-wrap: balance; letter-spacing: .02em;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .role { color: var(--ink-soft); margin: 0 0 6px; }
+  .hero .name { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
+  .hero .name .kana { font-size: 12px; color: var(--ink-soft); font-weight: 400; margin-left: 10px; letter-spacing: .1em; }
+  .hero-links { display: flex; gap: 18px; font-family: var(--mono); font-size: 13px; flex-wrap: wrap; }
+  .avatar {
+    flex: 0 0 auto; width: 180px; height: 180px; border-radius: 50%;
+    border: 2px dashed var(--line); background: var(--card);
+    display: grid; place-content: center; text-align: center;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-soft); line-height: 1.6;
+  }
+  .tag-kari {
+    display: inline-block; font-family: var(--mono); font-size: 11px;
+    border: 1px solid var(--line); color: var(--ink-soft);
+    padding: 0 8px; border-radius: 2px; vertical-align: middle; margin-left: 10px;
+  }
+
+  /* ---- Highlights ---- */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 2px;
+    padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;
+    transition: border-color .15s ease;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card .chip { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--accent); }
+  .card h3 { font-size: 17px; font-weight: 700; margin: 0; line-height: 1.6; text-wrap: balance; }
+  .card p { margin: 0; font-size: 14px; line-height: 1.9; color: var(--ink-soft); flex: 1; }
+  .card .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 12px; }
+
+  /* ---- 職務経歴 timeline ---- */
+  .tl { list-style: none; margin: 0; padding: 0 0 0 20px; border-left: 2px solid var(--line); }
+  .tl > li { position: relative; padding: 0 0 40px 22px; }
+  .tl > li:last-child { padding-bottom: 8px; }
+  .tl > li::before {
+    content: ""; position: absolute; left: -27px; top: 10px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--paper);
+  }
+  .tl .period { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); letter-spacing: .06em; }
+  .tl h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 4px 0 2px; }
+  .tl .role { font-size: 13px; color: var(--accent); font-weight: 700; margin: 0 0 10px; }
+  .tl p.about { font-size: 14px; color: var(--ink-soft); margin: 0 0 10px; max-width: 40rem; }
+  .tl ul { margin: 0; padding-left: 1.2em; max-width: 40rem; }
+  .tl ul li { font-size: 14.5px; margin-bottom: 6px; }
+
+  /* ---- iegoto ---- */
+  .work {
+    background: var(--card); border: 1px solid var(--line); border-radius: 2px;
+    display: flex; flex-wrap: wrap;
+  }
+  .work .shot {
+    flex: 1 1 240px; min-height: 200px; margin: 16px;
+    border: 2px dashed var(--line); border-radius: 2px;
+    display: grid; place-content: center;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-soft); text-align: center; line-height: 1.7;
+  }
+  .work .body { flex: 2 1 380px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .work h3 { font-family: var(--serif); font-size: 22px; margin: 0; }
+  .work p { margin: 0; font-size: 14.5px; max-width: 40rem; }
+  .work .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 12px; }
+
+  /* ---- スキル ---- */
+  .skills { display: grid; grid-template-columns: max-content 1fr; gap: 14px 28px; max-width: 46rem; }
+  .skills dt { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; color: var(--accent); padding-top: 3px; }
+  .skills dd { margin: 0; font-size: 14.5px; }
+  @media (max-width: 560px) { .skills { grid-template-columns: 1fr; gap: 2px; } .skills dd { margin-bottom: 12px; } }
+
+  /* ---- アウトプット ---- */
+  .outs { display: grid; gap: 0; max-width: 46rem; border-top: 1px solid var(--line); }
+  .outs a {
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 16px 4px; border-bottom: 1px solid var(--line); text-decoration: none;
+  }
+  .outs a:hover { color: var(--accent); }
+  .outs .svc { font-weight: 700; }
+  .outs .url { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+
+  /* ---- Footer ---- */
+  footer { margin-top: 88px; border-top: 1px solid var(--line); padding: 48px 0 64px; }
+  footer .wrap { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .hanko {
+    width: 52px; height: 52px; border-radius: 4px;
+    background: var(--accent); color: #fff;
+    font-family: var(--serif); font-weight: 700; font-size: 17px; line-height: 1.25;
+    display: grid; place-content: center; text-align: center; letter-spacing: .05em;
+  }
+  footer .meta { font-size: 13px; color: var(--ink-soft); }
+  footer .meta .mono { font-size: 12px; }
+
+  /* ---- モック用スペックセクション ---- */
+  .spec { margin-top: 96px; border-top: 2px solid var(--ink); padding-top: 24px; }
+  .spec h2 { font-family: var(--mono); font-size: 14px; letter-spacing: .2em; }
+  .spec .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; font-size: 13px; }
+  .spec .chipset { display: flex; gap: 8px; flex-wrap: wrap; }
+  .spec .c { width: 40px; height: 40px; border-radius: 2px; border: 1px solid var(--line); }
+  .spec dl { margin: 0; }
+  .spec dt { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; color: var(--accent); margin-top: 10px; }
+  .spec dd { margin: 0; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+  }
+</style>
+
+<div class="mocknote">
+  <div class="wrap">
+    <strong>DESIGN MOCK</strong>
+    <span>実装前のイメージすり合わせ用。この帯と最下部のスペック欄は実装には含めません</span>
+    <span class="sw" role="group" aria-label="アクセント色の切り替え">
+      accent:
+      <button type="button" data-a="shu" aria-pressed="true">朱</button>
+      <button type="button" data-a="ai" aria-pressed="false">藍</button>
+      <button type="button" data-a="matsu" aria-pressed="false">松</button>
+    </span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <p class="eyebrow">Portfolio <span class="jp">— Kawanaga Yuta</span></p>
+      <h1>実装から、<br>組織づくり<em>まで。</em><span class="tag-kari">コピーは仮置き</span></h1>
+      <p class="role">リードエンジニア @ PLAINER株式会社</p>
+      <p class="name">川永 勇多<span class="kana">かわなが ゆうた</span></p>
+      <nav class="hero-links" aria-label="外部リンク">
+        <a href="https://github.com/YutaKawanaga">GitHub ↗</a>
+        <a href="https://zenn.dev/yutakawanaga">Zenn ↗</a>
+        <a href="https://qiita.com/YutaKawanaga">Qiita ↗</a>
+      </nav>
+    </div>
+    <div class="avatar">assets/icon.png<br>(白黒線画イラスト)<br>配置待ち</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Highlights <span class="jp">— 選抜実績</span></p>
+    <div class="cards">
+      <article class="card">
+        <span class="chip">組織 × AI</span>
+        <h3>開発組織のAIネイティブ化</h3>
+        <p>レビュー・リリース・障害対応・採用補助を、AIエージェント前提のフローへ再構築。エージェントが利用シグナルからコンテキストとルールを自動更新し続ける仕組みで、属人的メンテナンスなしに品質を維持。セキュリティチェックや問い合わせ対応の工数を大幅に削減した。</p>
+        <div class="tech">Claude / OpenAI / MCP / Slack Bot / GitHub Actions</div>
+      </article>
+      <article class="card">
+        <span class="chip">無停止リプレース</span>
+        <h3>プロダクト全面リプレース</h3>
+        <p>カオス化したプロダクトを、現行顧客の稼働を止めずにアーキテクチャから刷新。Django/AWS から Kotlin/GCP へ言語・インフラごと移行し、バックエンド・フロントエンド・ブラウザ拡張を横断して実装。新旧併用期間を設けて顧客ごとに段階移行した。</p>
+        <div class="tech">Kotlin / Ktor / React / TypeScript / GCP</div>
+      </article>
+      <article class="card">
+        <span class="chip">0 → 1</span>
+        <h3>1人目エンジニアとしてSaaSを事業化</h3>
+        <p>担当者が手作業のExcel加工で提供していた属人フローを、ユーザー自身がデータを取得できるSaaSへ転換。仕様検討から実装・リリース、AWS本番環境構築(マルチアカウント+SSO)までを1人で担当した。</p>
+        <div class="tech">Python / Django (DRF) / React / AWS</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Career <span class="jp">— 職務経歴</span></p>
+    <ul class="tl">
+      <li>
+        <span class="period">2023.07 — 現在</span>
+        <h3>PLAINER株式会社</h3>
+        <p class="role">リードエンジニア</p>
+        <p class="about">SaaSの画面をノーコードで複製・カスタマイズし、デモの作成・配信・アクセス解析ができるプラットフォーム。</p>
+        <ul>
+          <li>開発組織のAIネイティブ化 (Highlights参照)</li>
+          <li>プロダクト全面リプレース (Highlights参照)</li>
+          <li>社内管理画面の全面刷新 — IAPベース認証、TypeSpec/OpenAPIからの型自動生成</li>
+          <li>業務委託エンジニアのマネジメント、FDE的な顧客対話、AI-DLC×アジャイルのカンバン設計・導入</li>
+        </ul>
+      </li>
+      <li>
+        <span class="period">2023.01 — 2023.06</span>
+        <h3>TRUSTART株式会社</h3>
+        <p class="role">Webエンジニア (1人目エンジニア)</p>
+        <p class="about">不動産関連のSaaS事業。</p>
+        <ul>
+          <li>不動産登記情報ダウンロードSaaSの0→1 (Highlights参照)</li>
+          <li>AWS本番環境構築 — Control Tower / マルチアカウント / SSO</li>
+          <li>OCRオペレーション自動化 — S3起点でECSタスク自動起動、Slack通知</li>
+        </ul>
+      </li>
+      <li>
+        <span class="period">2019.01 — 2022.12</span>
+        <h3>Shelfy株式会社</h3>
+        <p class="role">Webエンジニア</p>
+        <p class="about">建設業界向けSaaSの開発・提供。</p>
+        <ul>
+          <li>工程管理SaaS — クリーンアーキテクチャで全API実装、UUID起点の楽観的UI</li>
+          <li>調整業務効率化SaaS — 複雑な調整ルールのUI化、パフォーマンス設計</li>
+          <li>安全書類作成SaaS — 紙と一致する帳票のWeb化。現在も主力事業として継続</li>
+        </ul>
+      </li>
+      <li>
+        <span class="period">2018.04 — 2018.12</span>
+        <h3>ハンズラボ株式会社</h3>
+        <p class="role">Webエンジニア (新卒)</p>
+        <p class="about">小売向けシステム開発。フランチャイズ店舗向けPOSシステムの機能開発・テスト。</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Personal Work <span class="jp">— 個人開発</span></p>
+    <div class="work">
+      <div class="shot">スクリーンショット<br>(カレンダー画面)</div>
+      <div class="body">
+        <h3>iegoto — 家族専用Webカレンダー</h3>
+        <p>スマホを持たない子どもも「プロフィール」として予定の主体になれる、家族のためのカレンダー。Vercel Hobby + Neon Free の0円構成で本番運用中。</p>
+        <p>モノレポでクリーンアーキテクチャの依存方向をパッケージ境界で強制し、RRULE展開エンジンを純関数で実装。設計判断は docs/design に記録する運用。</p>
+        <div class="tech">Vite / React 19 / Hono / tRPC v11 / Prisma / Playwright — <a href="https://iegoto-drab.vercel.app">iegoto-drab.vercel.app ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Skills <span class="jp">— スキル</span></p>
+    <dl class="skills">
+      <dt>Backend</dt><dd>Kotlin / Ktor, Python / Django (DRF), PostgreSQL, Redis, JOOQ, Flyway</dd>
+      <dt>Frontend</dt><dd>React / TypeScript, Jotai, React Query, SWR, shadcn/ui, Chakra UI, Vite</dd>
+      <dt>Infra</dt><dd>GCP (Cloud Run, Pub/Sub, IAP ほか), AWS (ECS, Lambda, Control Tower ほか), Docker, Terraform</dd>
+      <dt>AI</dt><dd>Claude / Claude Code, OpenAI / Codex, Gemini, MCP</dd>
+      <dt>API / Test</dt><dd>TypeSpec / OpenAPI / orval, Playwright, Kotest</dd>
+      <dt>設計</dt><dd>クリーンアーキテクチャ, DDD, bulletproof-react, ブラウザ拡張開発, 帳票生成</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Output <span class="jp">— アウトプット</span></p>
+    <div class="outs">
+      <a href="https://zenn.dev/yutakawanaga"><span class="svc">Zenn</span><span class="url">zenn.dev/yutakawanaga</span></a>
+      <a href="https://qiita.com/YutaKawanaga"><span class="svc">Qiita</span><span class="url">qiita.com/YutaKawanaga</span></a>
+      <a href="https://github.com/YutaKawanaga"><span class="svc">GitHub</span><span class="url">github.com/YutaKawanaga</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="hanko" aria-hidden="true">川<br>永</div>
+    <div class="meta">
+      連絡は GitHub にて (メールアドレスは非公開)<br>
+      <span class="mono">© 2026 Yuta Kawanaga</span>
+    </div>
+  </div>
+</footer>
+
+<div class="spec">
+  <div class="wrap">
+    <h2>DESIGN SPEC (モック専用欄)</h2>
+    <div class="grid">
+      <div>
+        <dl>
+          <dt>Concept</dt>
+          <dd>アイコンの白黒線画を基準にした「紙と墨」。アクセントは印鑑の朱を署名的に少量だけ使う (見出しラベル・タイムラインの点・フッターの印)。</dd>
+          <dt>Palette</dt>
+          <dd>
+            <span class="chipset">
+              <span class="c" style="background:var(--paper)" title="paper"></span>
+              <span class="c" style="background:var(--ink)" title="ink"></span>
+              <span class="c" style="background:var(--ink-soft)" title="ink-soft"></span>
+              <span class="c" style="background:var(--accent)" title="accent"></span>
+            </span>
+            紙白 / 墨 / 淡墨 / 朱 (or 藍・松)。ダークは墨紙に反転。
+          </dd>
+        </dl>
+      </div>
+      <div>
+        <dl>
+          <dt>Typography</dt>
+          <dd>見出し: 明朝 (Hiragino Mincho / Yu Mincho)。本文: ゴシック。日付・URL・技術タグ: 等幅。すべてシステムフォントで Web フォント読み込みなし。</dd>
+          <dt>Layout</dt>
+          <dd>1カラム左寄せ、本文幅は40rem上限。カードは角丸2px・細罫線のみ。装飾アニメーションなし、ホバーで罫線が朱になる程度。</dd>
+        </dl>
+      </div>
+      <div>
+        <dl>
+          <dt>実装時に決めること</dt>
+          <dd>・ヒーローコピー確定 (現在は仮置き)<br>・アイコン画像の配置 (assets/icon.png)<br>・iegoto スクリーンショットの選定<br>・アクセント色の確定 (右上の切り替えで比較)</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.mocknote button[data-a]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.documentElement.dataset.accent = btn.dataset.a;
+      document.querySelectorAll('.mocknote button[data-a]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+    });
+  });
+</script>

@@ -3,15 +3,18 @@
   :root {
     --a-l: #C73E20; --a-d: #E06845;
     --accent: var(--a-l);
-    --paper: #FBFAF7;
+    --paper: #FBFAF6;
     --card: #FFFFFF;
-    --ink: #201E1B;
+    --ink: #26231F;
     --ink-soft: #5C574E;
-    --line: #DCD8CE;
+    --line: #D8D3C8;
     --line-soft: #EAE7DF;
-    --serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    --disp: "Hiragino Maru Gothic ProN", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, "Osaka-Mono", monospace;
+    /* 手描き風のゆらぎ角丸 */
+    --wob: 255px 18px 225px 18px / 18px 225px 18px 255px;
+    --wob-s: 60px 8px 55px 10px / 10px 55px 8px 60px;
   }
   :root[data-accent="ai"]   { --a-l: #33529E; --a-d: #7E97D8; }
   :root[data-accent="matsu"]{ --a-l: #2E6B4E; --a-d: #6FAE8F; }
@@ -19,170 +22,233 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --accent: var(--a-d);
-      --paper: #191816;
-      --card: #201E1B;
-      --ink: #ECE8E1;
+      --paper: #1A1917;
+      --card: #232120;
+      --ink: #EDE9E2;
       --ink-soft: #A29C91;
-      --line: #3A362F;
-      --line-soft: #2B2823;
+      --line: #403C35;
+      --line-soft: #2C2925;
     }
   }
   :root[data-theme="dark"] {
     --accent: var(--a-d);
-    --paper: #191816;
-    --card: #201E1B;
-    --ink: #ECE8E1;
-    --ink-soft: #A29C91;
-    --line: #3A362F;
-    --line-soft: #2B2823;
+    --paper: #1A1917; --card: #232120; --ink: #EDE9E2;
+    --ink-soft: #A29C91; --line: #403C35; --line-soft: #2C2925;
   }
   :root[data-theme="light"] {
     --accent: var(--a-l);
-    --paper: #FBFAF7;
-    --card: #FFFFFF;
-    --ink: #201E1B;
-    --ink-soft: #5C574E;
-    --line: #DCD8CE;
-    --line-soft: #EAE7DF;
+    --paper: #FBFAF6; --card: #FFFFFF; --ink: #26231F;
+    --ink-soft: #5C574E; --line: #D8D3C8; --line-soft: #EAE7DF;
   }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.9;
-    font-size: 16px;
-    margin: 0;
+    background: var(--paper); color: var(--ink);
+    font-family: var(--sans); line-height: 1.9; font-size: 16px; margin: 0;
+    overflow-x: hidden;
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
   a { color: var(--ink); text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
   a:hover { color: var(--accent); }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .mono { font-family: var(--mono); }
 
-  /* ---- モック用ノーティスバー (実装には含めない) ---- */
-  .mocknote {
-    font-family: var(--mono); font-size: 12px;
-    border-bottom: 1px solid var(--line);
-    padding: 10px 0;
+  /* マーカー(蛍光ペン)ハイライト */
+  .hl {
+    background: linear-gradient(transparent 58%, color-mix(in srgb, var(--accent) 26%, transparent) 58%, color-mix(in srgb, var(--accent) 26%, transparent) 94%, transparent 94%);
   }
+
+  /* ---- モック用ノーティスバー ---- */
+  .mocknote { font-family: var(--mono); font-size: 12px; border-bottom: 1px dashed var(--line); padding: 10px 0; }
   .mocknote .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
-  .mocknote strong { color: var(--accent); font-weight: 700; letter-spacing: .08em; }
+  .mocknote strong { color: var(--accent); letter-spacing: .08em; }
   .mocknote .sw { display: flex; gap: 6px; margin-left: auto; align-items: center; }
   .mocknote button {
     font-family: var(--mono); font-size: 12px; cursor: pointer;
-    background: none; border: 1px solid var(--line); color: var(--ink);
-    padding: 2px 10px; border-radius: 2px;
+    background: none; border: 1.5px solid var(--line); color: var(--ink);
+    padding: 2px 10px; border-radius: var(--wob-s);
   }
   .mocknote button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
 
   /* ---- 共通 ---- */
-  section { padding: 72px 0 0; }
-  .eyebrow {
-    font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
-    color: var(--accent); text-transform: uppercase;
-    display: flex; align-items: center; gap: 12px; margin: 0 0 20px;
+  section { padding: 76px 0 0; }
+  .badge {
+    display: inline-block; font-family: var(--mono); font-size: 12px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+    border: 1.5px solid var(--accent); border-radius: var(--wob-s);
+    padding: 2px 14px; transform: rotate(-2deg); margin-bottom: 18px;
   }
-  .eyebrow::after { content: ""; height: 1px; background: var(--line); flex: 0 0 48px; }
-  .eyebrow .jp { color: var(--ink-soft); letter-spacing: .1em; }
-  h2 { font-family: var(--serif); font-weight: 600; font-size: 26px; margin: 0 0 24px; text-wrap: balance; }
+  h2 {
+    font-family: var(--disp); font-weight: 700; font-size: 27px; margin: 0 0 28px;
+    text-wrap: balance; letter-spacing: .02em;
+    text-decoration: underline wavy var(--accent) 2px; text-underline-offset: 10px;
+    display: inline-block;
+  }
   .prose { max-width: 40rem; }
-  .mono { font-family: var(--mono); }
-  .note { font-size: 12px; color: var(--ink-soft); font-family: var(--mono); }
+
+  /* スタンプ風チップ */
+  .st {
+    display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; color: var(--accent);
+    border: 1.5px solid var(--accent); border-radius: var(--wob-s);
+    padding: 1px 10px; transform: rotate(1.5deg); white-space: nowrap;
+  }
+  .st:nth-of-type(2n) { transform: rotate(-1.5deg); }
 
   /* ---- Hero ---- */
-  .hero { padding: 72px 0 8px; }
-  .hero .wrap { display: flex; gap: 40px; align-items: center; flex-wrap: wrap-reverse; }
-  .hero-text { flex: 1 1 420px; }
+  .hero { padding: 64px 0 16px; }
+  .hero .wrap { display: flex; gap: 48px; align-items: center; flex-wrap: wrap-reverse; }
+  .hero-text { flex: 1 1 400px; }
   .hero h1 {
-    font-family: var(--serif); font-weight: 600;
-    font-size: clamp(30px, 5.5vw, 46px); line-height: 1.5;
-    margin: 8px 0 16px; text-wrap: balance; letter-spacing: .02em;
+    font-family: var(--disp); font-weight: 800;
+    font-size: clamp(30px, 5.5vw, 46px); line-height: 1.55;
+    margin: 10px 0 14px; text-wrap: balance; letter-spacing: .02em;
   }
-  .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero .role { color: var(--ink-soft); margin: 0 0 6px; }
-  .hero .name { font-size: 18px; font-weight: 700; margin: 0 0 20px; }
-  .hero .name .kana { font-size: 12px; color: var(--ink-soft); font-weight: 400; margin-left: 10px; letter-spacing: .1em; }
-  .hero-links { display: flex; gap: 18px; font-family: var(--mono); font-size: 13px; flex-wrap: wrap; }
-  .avatar {
-    flex: 0 0 auto; width: 180px; height: 180px; border-radius: 50%;
-    border: 2px dashed var(--line); background: var(--card);
-    display: grid; place-content: center; text-align: center;
-    font-family: var(--mono); font-size: 11px; color: var(--ink-soft); line-height: 1.6;
-  }
+  .hero .role { color: var(--ink-soft); margin: 0 0 4px; font-size: 15px; }
+  .hero .name { font-size: 19px; font-weight: 700; margin: 0 0 22px; }
+  .hero .name .kana { font-size: 12px; color: var(--ink-soft); font-weight: 400; margin-left: 10px; letter-spacing: .12em; }
   .tag-kari {
-    display: inline-block; font-family: var(--mono); font-size: 11px;
-    border: 1px solid var(--line); color: var(--ink-soft);
-    padding: 0 8px; border-radius: 2px; vertical-align: middle; margin-left: 10px;
+    display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 400;
+    border: 1.5px dashed var(--line); color: var(--ink-soft);
+    padding: 0 8px; border-radius: var(--wob-s); vertical-align: middle; margin-left: 12px;
   }
 
-  /* ---- Highlights ---- */
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 2px;
-    padding: 24px 22px; display: flex; flex-direction: column; gap: 10px;
-    transition: border-color .15s ease;
+  /* アイコン付きリンクボタン (Hero) */
+  .hero-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .lbtn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 13px; font-weight: 700;
+    text-decoration: none; color: var(--ink);
+    border: 1.5px solid var(--ink); border-radius: var(--wob-s);
+    padding: 6px 16px; background: var(--card);
+    transition: transform .15s ease, box-shadow .15s ease, color .15s ease, border-color .15s ease;
   }
-  .card:hover { border-color: var(--accent); }
-  .card .chip { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--accent); }
-  .card h3 { font-size: 17px; font-weight: 700; margin: 0; line-height: 1.6; text-wrap: balance; }
-  .card p { margin: 0; font-size: 14px; line-height: 1.9; color: var(--ink-soft); flex: 1; }
-  .card .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 12px; }
+  .lbtn svg { width: 18px; height: 18px; fill: currentColor; }
+  .lbtn:hover {
+    color: var(--accent); border-color: var(--accent);
+    transform: rotate(-1.5deg) translateY(-2px);
+    box-shadow: 3px 3px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  /* アバター: 手描き風フレーム + 吹き出し + タピオカ */
+  .avatar-area { position: relative; flex: 0 0 auto; padding: 20px 30px 10px 10px; }
+  .avatar {
+    width: 190px; height: 190px;
+    border: 2.5px solid var(--ink); border-radius: 48% 52% 55% 45% / 50% 46% 54% 50%;
+    background: var(--card);
+    display: grid; place-content: center; text-align: center;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-soft); line-height: 1.7;
+  }
+  .bubble {
+    position: absolute; top: -14px; right: -6px;
+    font-family: var(--disp); font-size: 12px; font-weight: 700;
+    background: var(--card); border: 1.5px solid var(--ink);
+    border-radius: var(--wob-s); padding: 4px 12px; transform: rotate(3deg);
+  }
+  .bubble::after {
+    content: ""; position: absolute; left: 18px; bottom: -7px;
+    width: 10px; height: 10px; background: var(--card);
+    border-right: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink);
+    transform: rotate(45deg);
+  }
+  .pearl { position: absolute; border-radius: 50%; background: var(--ink); opacity: .85; }
+  .pearl.p1 { width: 10px; height: 10px; left: -4px;  top: 40px;  animation: bob 3.2s ease-in-out infinite; }
+  .pearl.p2 { width: 7px;  height: 7px;  left: 14px;  bottom: 6px; animation: bob 2.7s .4s ease-in-out infinite; }
+  .pearl.p3 { width: 8px;  height: 8px;  right: 6px;  bottom: 30px; animation: bob 3.6s .8s ease-in-out infinite; }
+  .pearl.p4 { width: 5px;  height: 5px;  right: 22px; top: 26px;  animation: bob 3s 1.2s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+  /* ---- マーキー ---- */
+  .marquee {
+    margin-top: 56px; border-top: 1.5px dashed var(--line); border-bottom: 1.5px dashed var(--line);
+    overflow: hidden; padding: 10px 0; white-space: nowrap;
+  }
+  .marquee .track { display: inline-block; animation: slide 30s linear infinite; }
+  .marquee span { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); letter-spacing: .1em; }
+  .marquee .dot { color: var(--accent); margin: 0 18px; }
+  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---- About ---- */
+  .about p { max-width: 40rem; margin: 0 0 14px; }
 
   /* ---- 職務経歴 timeline ---- */
-  .tl { list-style: none; margin: 0; padding: 0 0 0 20px; border-left: 2px solid var(--line); }
-  .tl > li { position: relative; padding: 0 0 40px 22px; }
+  .tl { list-style: none; margin: 0; padding: 0 0 0 20px; border-left: 2.5px dashed var(--line); }
+  .tl > li { position: relative; padding: 0 0 48px 24px; }
   .tl > li:last-child { padding-bottom: 8px; }
   .tl > li::before {
-    content: ""; position: absolute; left: -27px; top: 10px;
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent); border: 2px solid var(--paper);
+    content: ""; position: absolute; left: -29px; top: 12px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--ink); border: 3px solid var(--paper);
   }
+  .tl > li:first-child::before { background: var(--accent); }
   .tl .period { font-family: var(--mono); font-size: 12.5px; color: var(--ink-soft); letter-spacing: .06em; }
-  .tl h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 4px 0 2px; }
+  .tl .head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 4px 0 2px; }
+  .tl h3 { font-family: var(--disp); font-size: 21px; font-weight: 800; margin: 0; }
   .tl .role { font-size: 13px; color: var(--accent); font-weight: 700; margin: 0 0 10px; }
-  .tl p.about { font-size: 14px; color: var(--ink-soft); margin: 0 0 10px; max-width: 40rem; }
-  .tl ul { margin: 0; padding-left: 1.2em; max-width: 40rem; }
-  .tl ul li { font-size: 14.5px; margin-bottom: 6px; }
+  .tl p.about-t { font-size: 14px; color: var(--ink-soft); margin: 0 0 10px; max-width: 40rem; }
+  .tl ul { margin: 0; padding-left: 1.3em; max-width: 40rem; }
+  .tl ul li { font-size: 14.5px; margin-bottom: 7px; }
+  .tl ul li::marker { color: var(--accent); }
 
   /* ---- iegoto ---- */
   .work {
-    background: var(--card); border: 1px solid var(--line); border-radius: 2px;
-    display: flex; flex-wrap: wrap;
+    position: relative; background: var(--card);
+    border: 2px solid var(--ink); border-radius: var(--wob);
+    display: flex; flex-wrap: wrap; box-shadow: 5px 5px 0 color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .work .sticker {
+    position: absolute; top: -16px; left: 24px;
+    font-family: var(--disp); font-size: 13px; font-weight: 800;
+    background: var(--accent); color: #fff;
+    border-radius: var(--wob-s); padding: 3px 16px; transform: rotate(-3deg);
   }
   .work .shot {
-    flex: 1 1 240px; min-height: 200px; margin: 16px;
-    border: 2px dashed var(--line); border-radius: 2px;
+    flex: 1 1 240px; min-height: 210px; margin: 20px;
+    border: 2px dashed var(--line); border-radius: 14px 40px 18px 44px / 40px 16px 44px 14px;
     display: grid; place-content: center;
     font-family: var(--mono); font-size: 11px; color: var(--ink-soft); text-align: center; line-height: 1.7;
   }
-  .work .body { flex: 2 1 380px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
-  .work h3 { font-family: var(--serif); font-size: 22px; margin: 0; }
+  .work .body { flex: 2 1 380px; padding: 32px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .work h3 { font-family: var(--disp); font-size: 22px; font-weight: 800; margin: 0; }
   .work p { margin: 0; font-size: 14.5px; max-width: 40rem; }
-  .work .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 12px; }
+  .work .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1.5px dashed var(--line-soft); padding-top: 12px; }
 
   /* ---- スキル ---- */
-  .skills { display: grid; grid-template-columns: max-content 1fr; gap: 14px 28px; max-width: 46rem; }
-  .skills dt { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; color: var(--accent); padding-top: 3px; }
-  .skills dd { margin: 0; font-size: 14.5px; }
-  @media (max-width: 560px) { .skills { grid-template-columns: 1fr; gap: 2px; } .skills dd { margin-bottom: 12px; } }
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; max-width: 46rem; }
+  .pillgroup { margin-bottom: 26px; }
+  .pillgroup .glabel { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; color: var(--accent); margin: 0 0 10px; }
+  .pill {
+    font-size: 13.5px; background: var(--card);
+    border: 1.5px solid var(--line); border-radius: var(--wob-s);
+    padding: 3px 14px; transition: transform .15s ease, border-color .15s ease;
+  }
+  .pill.hot { border-color: var(--ink); font-weight: 700; }
+  .pill:hover { border-color: var(--accent); transform: rotate(-1.5deg); }
 
   /* ---- アウトプット ---- */
-  .outs { display: grid; gap: 0; max-width: 46rem; border-top: 1px solid var(--line); }
-  .outs a {
-    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-    padding: 16px 4px; border-bottom: 1px solid var(--line); text-decoration: none;
+  .outs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .out {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card); border: 2px solid var(--ink); border-radius: var(--wob);
+    padding: 18px 20px; text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
   }
-  .outs a:hover { color: var(--accent); }
-  .outs .svc { font-weight: 700; }
-  .outs .url { font-family: var(--mono); font-size: 13px; color: var(--ink-soft); }
+  .out:nth-child(2) { transform: rotate(.6deg); }
+  .out:hover {
+    transform: rotate(-1deg) translateY(-3px);
+    box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+    color: var(--ink);
+  }
+  .out svg { width: 30px; height: 30px; fill: currentColor; flex: 0 0 auto; color: var(--accent); }
+  .out .svc { font-family: var(--disp); font-weight: 800; font-size: 16px; line-height: 1.4; }
+  .out .desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
 
   /* ---- Footer ---- */
-  footer { margin-top: 88px; border-top: 1px solid var(--line); padding: 48px 0 64px; }
+  footer { margin-top: 96px; border-top: 1.5px dashed var(--line); padding: 48px 0 72px; }
   footer .wrap { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
   .hanko {
-    width: 52px; height: 52px; border-radius: 4px;
-    background: var(--accent); color: #fff;
-    font-family: var(--serif); font-weight: 700; font-size: 17px; line-height: 1.25;
+    width: 54px; height: 54px; border-radius: 10px 14px 8px 16px / 14px 8px 16px 10px;
+    background: var(--accent); color: #fff; transform: rotate(-4deg);
+    font-family: var(--disp); font-weight: 800; font-size: 17px; line-height: 1.25;
     display: grid; place-content: center; text-align: center; letter-spacing: .05em;
   }
   footer .meta { font-size: 13px; color: var(--ink-soft); }
@@ -190,7 +256,7 @@
 
   /* ---- モック用スペックセクション ---- */
   .spec { margin-top: 96px; border-top: 2px solid var(--ink); padding-top: 24px; }
-  .spec h2 { font-family: var(--mono); font-size: 14px; letter-spacing: .2em; }
+  .spec h2 { font-family: var(--mono); font-size: 14px; letter-spacing: .2em; text-decoration: none; }
   .spec .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; font-size: 13px; }
   .spec .chipset { display: flex; gap: 8px; flex-wrap: wrap; }
   .spec .c { width: 40px; height: 40px; border-radius: 2px; border: 1px solid var(--line); }
@@ -199,14 +265,15 @@
   .spec dd { margin: 0; color: var(--ink-soft); }
 
   @media (prefers-reduced-motion: reduce) {
-    .card { transition: none; }
+    .pearl, .marquee .track { animation: none; }
+    .lbtn, .out, .pill { transition: none; }
   }
 </style>
 
 <div class="mocknote">
   <div class="wrap">
-    <strong>DESIGN MOCK</strong>
-    <span>実装前のイメージすり合わせ用。この帯と最下部のスペック欄は実装には含めません</span>
+    <strong>DESIGN MOCK v2</strong>
+    <span>手描き・遊びを足した改訂版 (この帯と最下部のスペック欄は実装に含めない)</span>
     <span class="sw" role="group" aria-label="アクセント色の切り替え">
       accent:
       <button type="button" data-a="shu" aria-pressed="true">朱</button>
@@ -219,78 +286,81 @@
 <header class="hero">
   <div class="wrap">
     <div class="hero-text">
-      <p class="eyebrow">Portfolio <span class="jp">— Kawanaga Yuta</span></p>
-      <h1>実装から、<br>組織づくり<em>まで。</em><span class="tag-kari">コピーは仮置き</span></h1>
+      <span class="badge">Portfolio</span>
+      <h1><span class="hl">実装</span>から、<br><span class="hl">組織づくり</span>まで。<span class="tag-kari">コピーは仮</span></h1>
       <p class="role">リードエンジニア @ PLAINER株式会社</p>
       <p class="name">川永 勇多<span class="kana">かわなが ゆうた</span></p>
       <nav class="hero-links" aria-label="外部リンク">
-        <a href="https://github.com/YutaKawanaga">GitHub ↗</a>
-        <a href="https://zenn.dev/yutakawanaga">Zenn ↗</a>
-        <a href="https://qiita.com/YutaKawanaga">Qiita ↗</a>
+        <a class="lbtn" href="https://github.com/YutaKawanaga">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a class="lbtn" href="https://zenn.dev/yutakawanaga">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.264 23.771h4.984c.264 0 .498-.147.645-.352L19.614.874c.176-.293-.029-.645-.381-.645h-4.72c-.235 0-.44.117-.557.323L.03 23.361c-.088.176.029.41.234.41zM17.445 23.419l6.479-10.408c.205-.323-.029-.733-.41-.733h-4.691c-.176 0-.352.088-.44.235l-6.655 10.643c-.176.264.029.616.352.616h4.779c.234 0 .468-.117.586-.353z"/></svg>
+          Zenn
+        </a>
+        <a class="lbtn" href="https://qiita.com/YutaKawanaga">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8.2" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15.5 15.5 22 22l-2.6 1.4-6-6z"/></svg>
+          Qiita
+        </a>
       </nav>
     </div>
-    <div class="avatar">assets/icon.png<br>(白黒線画イラスト)<br>配置待ち</div>
+    <div class="avatar-area" aria-hidden="true">
+      <span class="bubble">ここに僕のイラスト</span>
+      <div class="avatar">assets/icon.png<br>配置待ち</div>
+      <span class="pearl p1"></span><span class="pearl p2"></span>
+      <span class="pearl p3"></span><span class="pearl p4"></span>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Kotlin<i class="dot">●</i>React<i class="dot">●</i>TypeScript<i class="dot">●</i>GCP<i class="dot">●</i>AWS<i class="dot">●</i>Claude Code<i class="dot">●</i>MCP<i class="dot">●</i>クリーンアーキテクチャ<i class="dot">●</i>AI-DLC<i class="dot">●</i>0→1<i class="dot">●</i>チームビルディング<i class="dot">●</i></span><span>Kotlin<i class="dot">●</i>React<i class="dot">●</i>TypeScript<i class="dot">●</i>GCP<i class="dot">●</i>AWS<i class="dot">●</i>Claude Code<i class="dot">●</i>MCP<i class="dot">●</i>クリーンアーキテクチャ<i class="dot">●</i>AI-DLC<i class="dot">●</i>0→1<i class="dot">●</i>チームビルディング<i class="dot">●</i></span>
+    </div>
   </div>
 </header>
 
-<section>
+<section class="about">
   <div class="wrap">
-    <p class="eyebrow">Highlights <span class="jp">— 選抜実績</span></p>
-    <div class="cards">
-      <article class="card">
-        <span class="chip">組織 × AI</span>
-        <h3>開発組織のAIネイティブ化</h3>
-        <p>レビュー・リリース・障害対応・採用補助を、AIエージェント前提のフローへ再構築。エージェントが利用シグナルからコンテキストとルールを自動更新し続ける仕組みで、属人的メンテナンスなしに品質を維持。セキュリティチェックや問い合わせ対応の工数を大幅に削減した。</p>
-        <div class="tech">Claude / OpenAI / MCP / Slack Bot / GitHub Actions</div>
-      </article>
-      <article class="card">
-        <span class="chip">無停止リプレース</span>
-        <h3>プロダクト全面リプレース</h3>
-        <p>カオス化したプロダクトを、現行顧客の稼働を止めずにアーキテクチャから刷新。Django/AWS から Kotlin/GCP へ言語・インフラごと移行し、バックエンド・フロントエンド・ブラウザ拡張を横断して実装。新旧併用期間を設けて顧客ごとに段階移行した。</p>
-        <div class="tech">Kotlin / Ktor / React / TypeScript / GCP</div>
-      </article>
-      <article class="card">
-        <span class="chip">0 → 1</span>
-        <h3>1人目エンジニアとしてSaaSを事業化</h3>
-        <p>担当者が手作業のExcel加工で提供していた属人フローを、ユーザー自身がデータを取得できるSaaSへ転換。仕様検討から実装・リリース、AWS本番環境構築(マルチアカウント+SSO)までを1人で担当した。</p>
-        <div class="tech">Python / Django (DRF) / React / AWS</div>
-      </article>
-    </div>
+    <span class="badge">About</span>
+    <h2>やってきたこと</h2>
+    <p class="prose">2018年からスタートアップに身を置き、フロントエンド・バックエンド・インフラを横断して手を動かしてきました。<span class="hl">1人目エンジニアとしての0→1</span>も、<span class="hl">稼働中プロダクトの無停止フルリプレース</span>も経験しています。</p>
+    <p class="prose">個人の生産性を上げること以上に、採用や仕組みづくりを通じて<span class="hl">チーム全体の生産性を引き上げる</span>ことに関心があります。直近は、人が担ってきた業務をAIエージェント前提のフローへ作り替える「開発組織のAIネイティブ化」に取り組んでいます。</p>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">Career <span class="jp">— 職務経歴</span></p>
+    <span class="badge">Career</span>
+    <h2>職務経歴</h2>
     <ul class="tl">
       <li>
         <span class="period">2023.07 — 現在</span>
-        <h3>PLAINER株式会社</h3>
+        <div class="head"><h3>PLAINER株式会社</h3><span class="st">組織×AI</span><span class="st">無停止リプレース</span></div>
         <p class="role">リードエンジニア</p>
-        <p class="about">SaaSの画面をノーコードで複製・カスタマイズし、デモの作成・配信・アクセス解析ができるプラットフォーム。</p>
+        <p class="about-t">SaaSの画面をノーコードで複製・カスタマイズし、デモの作成・配信・アクセス解析ができるプラットフォーム。</p>
         <ul>
-          <li>開発組織のAIネイティブ化 (Highlights参照)</li>
-          <li>プロダクト全面リプレース (Highlights参照)</li>
+          <li>開発組織のAIネイティブ化 — レビュー・リリース・障害対応・採用補助をAIエージェント前提のフローへ再構築。エージェントがコンテキストとルールを自動更新し続ける仕組みで、属人的メンテナンスなしに品質を維持</li>
+          <li>プロダクト全面リプレース — Django/AWS から Kotlin/GCP へ、現行顧客の稼働を止めずにアーキテクチャから刷新。バックエンド・フロントエンド・ブラウザ拡張を横断して実装</li>
           <li>社内管理画面の全面刷新 — IAPベース認証、TypeSpec/OpenAPIからの型自動生成</li>
           <li>業務委託エンジニアのマネジメント、FDE的な顧客対話、AI-DLC×アジャイルのカンバン設計・導入</li>
         </ul>
       </li>
       <li>
         <span class="period">2023.01 — 2023.06</span>
-        <h3>TRUSTART株式会社</h3>
-        <p class="role">Webエンジニア (1人目エンジニア)</p>
-        <p class="about">不動産関連のSaaS事業。</p>
+        <div class="head"><h3>TRUSTART株式会社</h3><span class="st">0→1</span><span class="st">1人目エンジニア</span></div>
+        <p class="role">Webエンジニア</p>
+        <p class="about-t">不動産関連のSaaS事業。</p>
         <ul>
-          <li>不動産登記情報ダウンロードSaaSの0→1 (Highlights参照)</li>
+          <li>不動産登記情報ダウンロードSaaSを0→1で事業化 — 手作業のExcel加工で提供していた属人フローを、ユーザー自身がデータを取得できるSaaSへ転換。仕様検討から実装・リリースまで1人で担当</li>
           <li>AWS本番環境構築 — Control Tower / マルチアカウント / SSO</li>
           <li>OCRオペレーション自動化 — S3起点でECSタスク自動起動、Slack通知</li>
         </ul>
       </li>
       <li>
         <span class="period">2019.01 — 2022.12</span>
-        <h3>Shelfy株式会社</h3>
+        <div class="head"><h3>Shelfy株式会社</h3><span class="st">建設×SaaS</span></div>
         <p class="role">Webエンジニア</p>
-        <p class="about">建設業界向けSaaSの開発・提供。</p>
+        <p class="about-t">建設業界向けSaaSの開発・提供。</p>
         <ul>
           <li>工程管理SaaS — クリーンアーキテクチャで全API実装、UUID起点の楽観的UI</li>
           <li>調整業務効率化SaaS — 複雑な調整ルールのUI化、パフォーマンス設計</li>
@@ -299,9 +369,9 @@
       </li>
       <li>
         <span class="period">2018.04 — 2018.12</span>
-        <h3>ハンズラボ株式会社</h3>
+        <div class="head"><h3>ハンズラボ株式会社</h3></div>
         <p class="role">Webエンジニア (新卒)</p>
-        <p class="about">小売向けシステム開発。フランチャイズ店舗向けPOSシステムの機能開発・テスト。</p>
+        <p class="about-t">小売向けシステム開発。フランチャイズ店舗向けPOSシステムの機能開発・テスト。</p>
       </li>
     </ul>
   </div>
@@ -309,8 +379,10 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">Personal Work <span class="jp">— 個人開発</span></p>
+    <span class="badge">Personal Work</span>
+    <h2>個人開発</h2>
     <div class="work">
+      <span class="sticker">家族で使ってます</span>
       <div class="shot">スクリーンショット<br>(カレンダー画面)</div>
       <div class="body">
         <h3>iegoto — 家族専用Webカレンダー</h3>
@@ -324,25 +396,53 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">Skills <span class="jp">— スキル</span></p>
-    <dl class="skills">
-      <dt>Backend</dt><dd>Kotlin / Ktor, Python / Django (DRF), PostgreSQL, Redis, JOOQ, Flyway</dd>
-      <dt>Frontend</dt><dd>React / TypeScript, Jotai, React Query, SWR, shadcn/ui, Chakra UI, Vite</dd>
-      <dt>Infra</dt><dd>GCP (Cloud Run, Pub/Sub, IAP ほか), AWS (ECS, Lambda, Control Tower ほか), Docker, Terraform</dd>
-      <dt>AI</dt><dd>Claude / Claude Code, OpenAI / Codex, Gemini, MCP</dd>
-      <dt>API / Test</dt><dd>TypeSpec / OpenAPI / orval, Playwright, Kotest</dd>
-      <dt>設計</dt><dd>クリーンアーキテクチャ, DDD, bulletproof-react, ブラウザ拡張開発, 帳票生成</dd>
-    </dl>
+    <span class="badge">Skills</span>
+    <h2>スキル</h2>
+    <div class="pillgroup">
+      <p class="glabel">BACKEND / FRONTEND</p>
+      <div class="pills">
+        <span class="pill hot">Kotlin / Ktor</span><span class="pill hot">React / TypeScript</span>
+        <span class="pill">Python / Django</span><span class="pill">PostgreSQL</span><span class="pill">Redis</span>
+        <span class="pill">Jotai</span><span class="pill">React Query</span><span class="pill">shadcn/ui</span><span class="pill">Vite</span>
+      </div>
+    </div>
+    <div class="pillgroup">
+      <p class="glabel">INFRA</p>
+      <div class="pills">
+        <span class="pill hot">GCP</span><span class="pill hot">AWS</span>
+        <span class="pill">Cloud Run</span><span class="pill">IAP</span><span class="pill">ECS</span><span class="pill">Lambda</span>
+        <span class="pill">Control Tower</span><span class="pill">Docker</span><span class="pill">Terraform</span>
+      </div>
+    </div>
+    <div class="pillgroup">
+      <p class="glabel">AI / 設計</p>
+      <div class="pills">
+        <span class="pill hot">Claude / Claude Code</span><span class="pill hot">MCP</span>
+        <span class="pill">OpenAI / Codex</span><span class="pill">TypeSpec / OpenAPI</span>
+        <span class="pill">Playwright</span><span class="pill">Kotest</span>
+        <span class="pill">クリーンアーキテクチャ</span><span class="pill">DDD</span><span class="pill">ブラウザ拡張</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">Output <span class="jp">— アウトプット</span></p>
+    <span class="badge">Output</span>
+    <h2>アウトプット</h2>
     <div class="outs">
-      <a href="https://zenn.dev/yutakawanaga"><span class="svc">Zenn</span><span class="url">zenn.dev/yutakawanaga</span></a>
-      <a href="https://qiita.com/YutaKawanaga"><span class="svc">Qiita</span><span class="url">qiita.com/YutaKawanaga</span></a>
-      <a href="https://github.com/YutaKawanaga"><span class="svc">GitHub</span><span class="url">github.com/YutaKawanaga</span></a>
+      <a class="out" href="https://zenn.dev/yutakawanaga">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.264 23.771h4.984c.264 0 .498-.147.645-.352L19.614.874c.176-.293-.029-.645-.381-.645h-4.72c-.235 0-.44.117-.557.323L.03 23.361c-.088.176.029.41.234.41zM17.445 23.419l6.479-10.408c.205-.323-.029-.733-.41-.733h-4.691c-.176 0-.352.088-.44.235l-6.655 10.643c-.176.264.029.616.352.616h4.779c.234 0 .468-.117.586-.353z"/></svg>
+        <span><span class="svc">Zenn</span><br><span class="desc">技術記事を書いています</span></span>
+      </a>
+      <a class="out" href="https://qiita.com/YutaKawanaga">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8.2" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15.5 15.5 22 22l-2.6 1.4-6-6z"/></svg>
+        <span><span class="svc">Qiita</span><br><span class="desc">昔の記事はこちら</span></span>
+      </a>
+      <a class="out" href="https://github.com/YutaKawanaga">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span><span class="svc">GitHub</span><br><span class="desc">コードはこちら (iegoto も)</span></span>
+      </a>
     </div>
   </div>
 </section>
@@ -359,12 +459,18 @@
 
 <div class="spec">
   <div class="wrap">
-    <h2>DESIGN SPEC (モック専用欄)</h2>
+    <h2>DESIGN SPEC v2 (モック専用欄)</h2>
     <div class="grid">
       <div>
         <dl>
           <dt>Concept</dt>
-          <dd>アイコンの白黒線画を基準にした「紙と墨」。アクセントは印鑑の朱を署名的に少量だけ使う (見出しラベル・タイムラインの点・フッターの印)。</dd>
+          <dd>アイコンの手描き線画の世界観をそのままUIに拡張。ゆらいだ角丸・傾いたスタンプ・タピオカの粒・吹き出し・マーカー線で「手描きの遊び」を足しつつ、本文の読みやすさは崩さない。</dd>
+          <dt>v1からの変更</dt>
+          <dd>明朝→丸ゴシック見出し / 直線罫→破線+ゆらぎ角丸 / Highlights廃止(実績はCareerに統合+スタンプ化) / リンクをアイコン付きボタンに / マーキー・タピオカ・吹き出し追加。</dd>
+        </dl>
+      </div>
+      <div>
+        <dl>
           <dt>Palette</dt>
           <dd>
             <span class="chipset">
@@ -373,22 +479,18 @@
               <span class="c" style="background:var(--ink-soft)" title="ink-soft"></span>
               <span class="c" style="background:var(--accent)" title="accent"></span>
             </span>
-            紙白 / 墨 / 淡墨 / 朱 (or 藍・松)。ダークは墨紙に反転。
+            紙白 / 墨 / 淡墨 / 朱 (or 藍・松)。v1から据え置き。
           </dd>
-        </dl>
-      </div>
-      <div>
-        <dl>
           <dt>Typography</dt>
-          <dd>見出し: 明朝 (Hiragino Mincho / Yu Mincho)。本文: ゴシック。日付・URL・技術タグ: 等幅。すべてシステムフォントで Web フォント読み込みなし。</dd>
-          <dt>Layout</dt>
-          <dd>1カラム左寄せ、本文幅は40rem上限。カードは角丸2px・細罫線のみ。装飾アニメーションなし、ホバーで罫線が朱になる程度。</dd>
+          <dd>見出し: 丸ゴシック太字 (Hiragino Maru Gothic)。本文: ゴシック。日付・技術: 等幅。システムフォントのみ。</dd>
         </dl>
       </div>
       <div>
         <dl>
+          <dt>Motion</dt>
+          <dd>タピオカの浮遊 / マーキー / ホバーで傾く程度に抑制。prefers-reduced-motion で全停止。</dd>
           <dt>実装時に決めること</dt>
-          <dd>・ヒーローコピー確定 (現在は仮置き)<br>・アイコン画像の配置 (assets/icon.png)<br>・iegoto スクリーンショットの選定<br>・アクセント色の確定 (右上の切り替えで比較)</dd>
+          <dd>・ヒーローコピー確定<br>・アイコン画像の配置 (assets/icon.png)<br>・iegoto スクリーンショット選定<br>・アクセント色の確定</dd>
         </dl>
       </div>
     </div>

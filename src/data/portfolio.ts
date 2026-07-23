@@ -5,8 +5,16 @@
 
 export const profile = {
   eyebrow: "Portfolio — Kawanaga Yuta",
-  // ヒーローコピーは仮置き。確定したら差し替える。
-  headlineParts: ["実装", "から、", "組織づくり", "まで。"] as const,
+  // ヒーローコピー (仮置き)。[a, b, c, d] は「<hl>a</hl>b / 改行 / <hl>c</hl>d」と表示される。
+  // a と c がマーカー強調される語。確定したら差し替える。
+  //
+  // 差し替え候補 (トーン別):
+  //   控えめ・自分の言葉:  ["必要なこと", "に、", "手を伸ばす", "。"]  ← 現在これ
+  //   craft:              ["つくる", "、直す、", "仕組みにする", "。"]
+  //   領域横断:            ["領域を決めずに", "、", "手を動かす", "。"]
+  //   事実ベース:          ["フロントからインフラ", "、", "そしてチームまで", "。"]
+  //   チーム志向:          ["つくることも", "、", "つくる人を増やすことも", "。"]
+  headlineParts: ["必要なこと", "に、", "手を伸ばす", "。"] as const,
   role: "リードエンジニア @ PLAINER株式会社",
   name: "川永 勇多",
   kana: "かわなが ゆうた",
@@ -37,7 +45,7 @@ export const career: CareerEntry[] = [
     period: "2023.07 — 現在",
     company: "PLAINER株式会社",
     role: "リードエンジニア",
-    chips: ["組織×AI", "無停止リプレース"],
+    chips: ["SaaS×ノーコード"],
     summary:
       "SaaSの画面をノーコードで複製・カスタマイズし、デモの作成・配信・アクセス解析ができるプラットフォーム。",
     bullets: [
@@ -51,7 +59,7 @@ export const career: CareerEntry[] = [
     period: "2023.01 — 2023.06",
     company: "TRUSTART株式会社",
     role: "Webエンジニア",
-    chips: ["0→1", "1人目エンジニア"],
+    chips: ["不動産×SaaS"],
     summary: "不動産関連のSaaS事業。",
     bullets: [
       "不動産登記情報ダウンロードSaaSを0→1で事業化 — 手作業のExcel加工で提供していた属人フローを、ユーザー自身がデータを取得できるSaaSへ転換。仕様検討から実装・リリースまで1人で担当",
@@ -75,7 +83,7 @@ export const career: CareerEntry[] = [
     period: "2018.04 — 2018.12",
     company: "ハンズラボ株式会社",
     role: "Webエンジニア (新卒)",
-    chips: [],
+    chips: ["小売×システム開発"],
     summary:
       "小売向けシステム開発。フランチャイズ店舗向けPOSシステムの機能開発・テスト。",
     bullets: [],

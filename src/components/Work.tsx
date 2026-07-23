@@ -1,4 +1,7 @@
 import { work } from "../data/portfolio";
+import shotCalendar from "../assets/iegoto/screenshot-calendar.png";
+import shotToday from "../assets/iegoto/screenshot-today-mobile.png";
+import shotShopping from "../assets/iegoto/screenshot-shopping-mobile.png";
 
 export function Work() {
   return (
@@ -8,11 +11,25 @@ export function Work() {
         <h2 className="h2">個人開発</h2>
         <hr className="rule" />
         <div className="work">
-          {/* スクリーンショット差し替え待ち。img に置き換える場合は className="work-shot" を維持 */}
           <div className="work-shot">
-            スクリーンショット
-            <br />
-            (カレンダー画面)
+            <img
+              className="shot-main"
+              src={shotCalendar}
+              alt="iegoto カレンダー月表示 (PC)"
+              loading="lazy"
+            />
+            <div className="shot-row">
+              <img
+                src={shotToday}
+                alt="iegoto 今日ビュー (モバイル)"
+                loading="lazy"
+              />
+              <img
+                src={shotShopping}
+                alt="iegoto 買い物リスト (モバイル)"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div className="work-body">
             <div className="work-head">

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Career } from "./components/Career";
-import { Work } from "./components/Work";
 import { Skills } from "./components/Skills";
 import { Output } from "./components/Output";
 
@@ -37,7 +36,6 @@ export function App() {
       <main>
         <About />
         <Career />
-        <Work />
         <Skills />
         <Output />
       </main>

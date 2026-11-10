@@ -146,25 +146,6 @@
   .tl ul li { font-size: 14.5px; margin-bottom: 7px; }
   .tl ul li::marker { color: var(--accent); }
 
-  /* ---- iegoto ---- */
-  .work {
-    background: var(--card); border: 1.5px solid var(--line); border-radius: 14px;
-    display: flex; flex-wrap: wrap; overflow: hidden;
-    transition: border-color .15s ease;
-  }
-  .work:hover { border-color: var(--accent); }
-  .work .shot {
-    flex: 1 1 240px; min-height: 210px; margin: 18px;
-    border: 2px dashed var(--line); border-radius: 10px;
-    display: grid; place-content: center;
-    font-family: var(--mono); font-size: 11px; color: var(--ink-soft); text-align: center; line-height: 1.7;
-  }
-  .work .body { flex: 2 1 380px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
-  .work .head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .work h3 { font-family: var(--disp); font-size: 22px; font-weight: 800; margin: 0; }
-  .work p { margin: 0; font-size: 14.5px; max-width: 40rem; }
-  .work .tech { font-family: var(--mono); font-size: 11.5px; color: var(--ink-soft); border-top: 1px solid var(--line-soft); padding-top: 12px; }
-
   /* ---- スキル ---- */
   .pills { display: flex; flex-wrap: wrap; gap: 10px; max-width: 46rem; }
   .pillgroup { margin-bottom: 24px; }
@@ -213,7 +194,7 @@
   .spec dd { margin: 0; color: var(--ink-soft); }
 
   @media (prefers-reduced-motion: reduce) {
-    .lbtn, .out, .pill, .work { transition: none; }
+    .lbtn, .out, .pill { transition: none; }
   }
 </style>
 
@@ -318,23 +299,6 @@
 
 <section>
   <div class="wrap">
-    <p class="eyebrow">Personal Work</p>
-    <h2>個人開発</h2>
-    <hr class="rule">
-    <div class="work">
-      <div class="shot">スクリーンショット<br>(カレンダー画面)</div>
-      <div class="body">
-        <div class="head"><h3>iegoto</h3><span class="st">家族で運用中</span></div>
-        <p>スマホを持たない子どもも「プロフィール」として予定の主体になれる、家族専用のWebカレンダー。Vercel Hobby + Neon Free の0円構成で本番運用中。</p>
-        <p>モノレポでクリーンアーキテクチャの依存方向をパッケージ境界で強制し、RRULE展開エンジンを純関数で実装。設計判断は docs/design に記録する運用。</p>
-        <div class="tech">Vite / React 19 / Hono / tRPC v11 / Prisma / Playwright — <a href="https://iegoto-drab.vercel.app">iegoto-drab.vercel.app ↗</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
     <p class="eyebrow">Skills</p>
     <h2>スキル</h2>
     <hr class="rule">
@@ -382,7 +346,7 @@
       </a>
       <a class="out" href="https://github.com/YutaKawanaga">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span><span class="svc">GitHub</span><br><span class="desc">コードはこちら (iegoto も)</span></span>
+        <span><span class="svc">GitHub</span><br><span class="desc">コードはこちら</span></span>
       </a>
     </div>
   </div>
@@ -431,7 +395,7 @@
           <dt>残した遊び</dt>
           <dd>マーカー強調 (hero/about) / ピル型チップ / フッターのわずかに傾いた印鑑 / ホバーの浮き上がり。</dd>
           <dt>実装時に決めること</dt>
-          <dd>・ヒーローコピー確定<br>・アイコン画像の配置 (assets/icon.png)<br>・iegoto スクリーンショット選定<br>・アクセント色の確定</dd>
+          <dd>・ヒーローコピー確定<br>・アイコン画像の配置 (assets/icon.png)<br>・アクセント色の確定</dd>
         </dl>
       </div>
     </div>

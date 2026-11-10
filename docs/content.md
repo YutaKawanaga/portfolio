@@ -82,19 +82,7 @@ SaaS の画面をノーコードで複製・カスタマイズし、デモの作
 
 フランチャイズ店舗向け POS システムの機能開発・テスト (Django REST framework)。
 
-## 4. 個人開発: iegoto
-
-家族専用 Web カレンダー。スマホを持たない子どもも「プロフィール」として
-予定の主体になれる。
-
-- Vercel Hobby + Neon Free の 0円構成で本番運用
-- モノレポでクリーンアーキテクチャの依存方向をパッケージ境界で強制
-  (web/api → db → domain、domain は依存ゼロ)
-- RRULE 展開エンジンを純関数で実装、設計判断を docs/design に記録する運用
-- 技術: Vite / React 19 / Hono / tRPC v11 / Prisma / Playwright
-- リンク: https://iegoto-drab.vercel.app / リポジトリ
-
-## 5. スキル (実績紐付けグルーピング)
+## 4. スキル (実績紐付けグルーピング)
 
 - **Backend**: Kotlin / Ktor, Python / Django (DRF), PostgreSQL, Redis, JOOQ, Flyway
 - **Frontend**: React / TypeScript, Jotai, React Query, SWR, shadcn/ui, Chakra UI, Vite
@@ -105,20 +93,20 @@ SaaS の画面をノーコードで複製・カスタマイズし、デモの作
 - **API / テスト**: TypeSpec / OpenAPI / orval, Playwright, Kotest
 - **設計**: クリーンアーキテクチャ, DDD, bulletproof-react, ブラウザ拡張開発, 帳票生成
 
-## 6. アウトプット
+## 5. アウトプット
 
 - Zenn: https://zenn.dev/yutakawanaga
 - Qiita: https://qiita.com/YutaKawanaga
 - GitHub: https://github.com/YutaKawanaga
 
-## 7. 自己PR (要約版)
+## 6. 自己PR (要約版)
 
 2018年からスタートアップで、実装に加えて企画・組織づくり・効果計測まで
 領域を限定せず手を動かしてきた。個人の生産性以上に、採用や仕組みづくりを通じて
 チーム全体の生産性を引き上げることに関心がある。近年は AI を開発プロセスそのものに
 組み込み、人が担ってきた仕事を AI 前提のフローへ作り替えることに取り組んでいる。
 
-## 8. 連絡先
+## 7. 連絡先
 
 - メールアドレスは公開しない (決定)
 - GitHub: https://github.com/YutaKawanaga

@@ -25,7 +25,7 @@ src/
   App.tsx              セクションを並べるだけのルート
   index.css            デザイントークン + 全スタイル (モックから移植)
   data/portfolio.ts    表示テキストを集約。文言調整はここだけ触ればよい
-  components/          Hero / About / Career / Work / Skills / Output / Footer
+  components/          Hero / About / Career / Skills / Output / Footer
   assets/icon.png      アバター画像 (現在は自動生成のプレースホルダー)
 public/icon.png        favicon / OGP 用 (同上)
 docs/
@@ -40,8 +40,6 @@ docs/
 
 - **アイコン画像の差し替え** — `src/assets/icon.png` と `public/icon.png` を本物のイラストで
   上書き (現在は自動生成のプレースホルダー)
-- **iegoto のスクリーンショット配置** — `src/components/Work.tsx` の `work-shot`
-  (現在は点線のプレースホルダー枠)
 - **Vercel デプロイの確認** — main 接続後、本番URLで表示を確認
 
 任意 (余力があれば):

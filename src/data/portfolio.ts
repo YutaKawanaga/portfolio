@@ -85,17 +85,6 @@ export const career: CareerEntry[] = [
   },
 ];
 
-export const work = {
-  name: "iegoto",
-  chip: "家族で運用中",
-  tagline: "家族専用のWebカレンダー",
-  paragraphs: [
-    "家族の予定や買い物を、まるごと共有できる家族専用のカレンダー。スマホを持たない子どもも「プロフィール」として予定に登場できるのが特徴です。",
-    "個人開発なので、気になった技術をとりあえず試す遊び場にもなっています。",
-  ],
-  tech: "Vite / React 19 / Hono / tRPC v11 / Prisma / PostgreSQL / Playwright",
-} as const;
-
 // スキルは強調なしのフラット表示。文字列の配列で持つ。
 export type SkillGroup = {
   label: string;
